@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/filter_mg"
+        android:title="MG" />
+    <item
+        android:id="@+id/filter_pg"
+        android:title="PG" />
+
+    <item
+        android:id="@+id/action_show"
+        android:title="Show"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_reset"
+        android:title="Reset"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+</menu>
