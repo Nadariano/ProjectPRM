@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/background">
+        <shape>
+            <size android:width="150dp" android:height="35dp"/>
+            <solid android:color="#FFFFFF" /> <!-- Background color for EditText -->
+            <stroke android:width="1dp" android:color="#B1BCBE" /> <!-- Border color and width -->
+            <corners android:radius="5dp" /> <!-- Corner radius -->
+        </shape>
+    </item>
+<!--    <item android:id="@+id/eye_icon">-->
+<!--        <bitmap-->
+<!--            android:gravity="end|center_vertical"-->
+<!--            android:paddingEnd="8dp" />-->
+<!--            />-->
+<!--&lt;!&ndash;            android:src="@drawable/ic_eye" &ndash;&gt;-->
+<!--&lt;!&ndash;        android:gravity="end|center_vertical"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:paddingEnd="8dp" />&ndash;&gt;-->
+<!--    </item>-->
+</layer-list>
