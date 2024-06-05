@@ -29,15 +29,23 @@ public class ShoppingCartActivity extends AppCompatActivity {
             return insets;
         });
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewCart);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Sample data
         List<CartItem> cartItems = new ArrayList<>();
-        cartItems.add(new CartItem("Gundam RX-78-2", 5, 150000));
-        cartItems.add(new CartItem("Gundam RX-78-2", 5, 150000));
-        cartItems.add(new CartItem("Gundam RX-78-2", 5, 150000));
-        cartItems.add(new CartItem("Gundam RX-78-2", 5, 150000));
+        cartItems.add(new CartItem("https://firebasestorage.googleapis.com/v0/b/prmgundamshop.appspot.com/o/HG001.jpg?alt=media&token=a1bba414-f632-45a1-8cb9-96835e6b8f42",
+                "HG RX-78-2 Fighter Beyond Global ",
+                5,
+                420));
+        cartItems.add(new CartItem("https://firebasestorage.googleapis.com/v0/b/prmgundamshop.appspot.com/o/HG001.jpg?alt=media&token=a1bba414-f632-45a1-8cb9-96835e6b8f42 ",
+                "HG RX-78-2 Fighter Beyond Global ",
+                5,
+                420));
+        cartItems.add(new CartItem("https://firebasestorage.googleapis.com/v0/b/prmgundamshop.appspot.com/o/HG001.jpg?alt=media&token=a1bba414-f632-45a1-8cb9-96835e6b8f42 ",
+                "HG RX-78-2 Fighter Beyond Global ",
+                5,
+                420));
         // Add more items as needed
 
         ShoppingCartAdapter adapter = new ShoppingCartAdapter(cartItems);
