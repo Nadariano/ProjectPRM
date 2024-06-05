@@ -1,5 +1,6 @@
 package com.example.gundammobile;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gundammobile.model.CartItem;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,12 +49,12 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CartItem item = cartItems.get(position);
+        Picasso.get().load(item.getProductImage()).into(holder.productImage);
         holder.productName.setText(item.getProductName());
         holder.quantity.setText(String.valueOf(item.getQuantity()));
         holder.unitPrice.setText(String.valueOf(item.getUnitPrice()));
-        // Assuming you have a method to set the product image
-        // holder.productImage.setImageResource(item.getProductImageResId());
     }
+
 
     @Override
     public int getItemCount() {
