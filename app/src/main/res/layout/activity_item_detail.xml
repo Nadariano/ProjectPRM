@@ -24,19 +24,19 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/productDetailPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="260dp"
-            android:text="282.500VNĐ"
+            android:text="420.0$"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/productDetailName"
             android:layout_width="222dp"
             android:layout_height="48dp"
             android:layout_marginStart="24dp"
@@ -66,7 +66,7 @@
                 android:text="Số lượng" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/productDetailQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -74,7 +74,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/productDetailImage"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginStart="104dp"
@@ -138,8 +138,8 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
+                android:id="@+id/productDetailBrand"
+                android:layout_width="123dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Bandai Namco"
@@ -170,11 +170,11 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
+                android:id="@+id/productDetailType"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="HG"
+                android:text="HIGH GRADE"
                 android:textAlignment="center" />
         </LinearLayout>
 
@@ -200,8 +200,8 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView15"
-                android:layout_width="wrap_content"
+                android:id="@+id/productDetailOrigin"
+                android:layout_width="74dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="JAPAN"
@@ -209,7 +209,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/productDetailDesc"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
