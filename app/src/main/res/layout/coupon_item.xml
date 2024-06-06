@@ -1,0 +1,23 @@
+<!-- coupon_item.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/ivCouponImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/rounded_border" />
+
+    <TextView
+        android:id="@+id/tvCouponTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coupon Title"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        android:gravity="center" />
+</LinearLayout>
