@@ -22,4 +22,10 @@
         android:name="com.example.gundammobile.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_bill"
+        android:name="com.example.gundammobile.ui.bill.BillFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/activity_billing" />
 </navigation>
