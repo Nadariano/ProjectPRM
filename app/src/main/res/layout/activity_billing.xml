@@ -165,7 +165,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Đơn giá (VNĐ)"
+            android:text="Đơn giá (kVNĐ)"
             android:textStyle="bold" />
     </LinearLayout>
 

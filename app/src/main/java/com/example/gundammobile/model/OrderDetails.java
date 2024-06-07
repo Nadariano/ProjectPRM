@@ -1,67 +1,67 @@
 package com.example.gundammobile.model;
 
 public class OrderDetails {
-    private int orderId;
-    private String productId;
-    private String productName;
-    private String productImage;
-    private int quantity;
-    private float unitPrice;
+    private int ORDER_ID;
+    private String PRODUCT_ID;
+    private String PRODUCTNAME;
+    private String PRODUCTIMAGE;
+    private int QUANTITY;
+    private float UNITPRICE;
 
-    public OrderDetails(int orderId, String productId, String productName, String productImage, int quantity, float unitPrice) {
-        this.orderId = orderId;
-        this.productId = productId;
-        this.productName = productName;
-        this.productImage = productImage;
-        this.quantity = quantity;
-        this.unitPrice = unitPrice;
+    public OrderDetails(int ORDER_ID, String PRODUCT_ID, String PRODUCTNAME, String PRODUCTIMAGE, int QUANTITY, float UNITPRICE) {
+        this.ORDER_ID = ORDER_ID;
+        this.PRODUCT_ID = PRODUCT_ID;
+        this.PRODUCTNAME = PRODUCTNAME;
+        this.PRODUCTIMAGE = PRODUCTIMAGE;
+        this.QUANTITY = QUANTITY;
+        this.UNITPRICE = UNITPRICE;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public int getORDER_ID() {
+        return ORDER_ID;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setORDER_ID(int ORDER_ID) {
+        this.ORDER_ID = ORDER_ID;
     }
 
-    public String getProductId() {
-        return productId;
+    public String getPRODUCT_ID() {
+        return PRODUCT_ID;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setPRODUCT_ID(String PRODUCT_ID) {
+        this.PRODUCT_ID = PRODUCT_ID;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getPRODUCTNAME() {
+        return PRODUCTNAME;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setPRODUCTNAME(String PRODUCTNAME) {
+        this.PRODUCTNAME = PRODUCTNAME;
     }
 
-    public String getProductImage() {
-        return productImage;
+    public String getPRODUCTIMAGE() {
+        return PRODUCTIMAGE;
     }
 
-    public void setProductImage(String productImage) {
-        this.productImage = productImage;
+    public void setPRODUCTIMAGE(String PRODUCTIMAGE) {
+        this.PRODUCTIMAGE = PRODUCTIMAGE;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getQUANTITY() {
+        return QUANTITY;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQUANTITY(int QUANTITY) {
+        this.QUANTITY = QUANTITY;
     }
 
-    public float getUnitPrice() {
-        return unitPrice;
+    public float getUNITPRICE() {
+        return UNITPRICE;
     }
 
-    public void setUnitPrice(float unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setUNITPRICE(float UNITPRICE) {
+        this.UNITPRICE = UNITPRICE;
     }
 }

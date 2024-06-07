@@ -36,11 +36,11 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         OrderDetails item = itemList.get(position);
-        holder.productImage.setImageURI(Uri.parse(item.getProductImage()));
-        Picasso.get().load(item.getProductImage()).into(holder.productImage);
-        holder.productName.setText(item.getProductName());
-        holder.quantity.setText(String.valueOf(item.getQuantity()));
-        holder.unitPrice.setText(String.valueOf(item.getUnitPrice()));
+        holder.productImage.setImageURI(Uri.parse(item.getPRODUCTIMAGE()));
+        Picasso.get().load(item.getPRODUCTIMAGE()).into(holder.productImage);
+        holder.productName.setText(item.getPRODUCTNAME());
+        holder.quantity.setText(String.valueOf(item.getQUANTITY()));
+        holder.unitPrice.setText(String.valueOf(item.getUNITPRICE()));
     }
 
     @Override
