@@ -1,4 +1,4 @@
-package com.example.gundammobile.home.models;
+package com.example.gundammobile.ui.home.models;
 
 
 public class Coupon {

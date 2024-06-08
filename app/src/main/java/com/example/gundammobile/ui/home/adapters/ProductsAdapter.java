@@ -1,5 +1,4 @@
-package com.example.gundammobile.home.adapters;
-
+package com.example.gundammobile.ui.home.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gundammobile.R;
-import com.example.gundammobile.home.models.Product;
+import com.example.gundammobile.ui.home.models.Product;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = products.get(position);
-        holder.bind(product);
+        holder.bind(product, listener);
     }
 
     @Override
@@ -50,6 +50,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         private ImageView ivProductImage;
         private TextView tvItemTitle;
         private TextView tvItemPrice;
+        private OnItemClickListener listener;
 
         ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,12 +60,12 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             itemView.setOnClickListener(this);
         }
 
-        void bind(Product product) {
-            // Set product data to views
-            // Example:
-            // ivProductImage.setImageResource(product.getImageResource());
+        void bind(Product product, OnItemClickListener listener) {
+            // Load image using Picasso
+            Picasso.get().load(product.getProductImage()).into(ivProductImage);
             tvItemTitle.setText(product.getProductName());
             tvItemPrice.setText(String.valueOf(product.getPrice()));
+            this.listener = listener;
         }
 
         @Override
