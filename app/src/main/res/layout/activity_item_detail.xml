@@ -11,7 +11,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FEECE2"
-    tools:context=".ItemDetailActivity">
+    tools:context=".ui.activity.ItemDetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -20,6 +20,7 @@
         android:layout_marginTop="16dp"
         android:background="#FFFFFF"
         android:paddingBottom="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -77,9 +78,9 @@
             android:id="@+id/productDetailImage"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_marginStart="104dp"
             android:layout_marginTop="16dp"
             android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -102,6 +103,7 @@
         android:layout_marginTop="412dp"
         android:background="#FFFFFF"
         android:paddingBottom="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -121,11 +123,11 @@
             android:id="@+id/linearLayout2"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="92dp"
             android:orientation="horizontal"
             android:padding="5dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -151,12 +153,12 @@
             android:id="@+id/linearLayout"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="52dp"
             android:background="#D9D9D9"
             android:orientation="horizontal"
             android:padding="5dp"
             app:layout_constraintCircleRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -182,12 +184,12 @@
             android:id="@+id/linearLayout3"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="132dp"
             android:background="#D9D9D9"
             android:orientation="horizontal"
             android:padding="5dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout2"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -212,9 +214,9 @@
             android:id="@+id/productDetailDesc"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="180dp"
             android:text="THƯƠNG HIỆU : BANDAI – NHẬT BẢN PHIÊN BẢN : HG [HIGH GRADE] Chiều cao: 13-16cm PH N LOẠI SP : LẮP RÁP – Sản phẩm nhựa cao cấp với độ sắc nét cao – Sản xuất bởi Bandai Namco – Nhật Bản Chính hãng – An toàn với trẻ em – Phát triển trí não cho trẻ hiệu quả đi đôi với niềm vui thích bất tận – Rèn luyện tính kiên nhẫn cho người chơi – Thông tin cơ bản : Mô hình gundam (gunpla) là một loại mô hình nhựa được gọi là Model kit, bao gồm nhiều mảnh nhựa rời được gọi là part (bộ phận), khi lắp ráp các part lại với nhau sẽ được mô hình hoàn chỉnh. Các mảnh nhựa rời này được gắn trên khung nhựa gọi là runner. Mỗi một hộp sản phẩm Gunpla bao gồm nhiều runner và các phụ kiện liên quan, một tập sách nhỏ (manual) bên trong giới thiệu sơ lược về mẫu Gundam trong hộp và phần hướng dẫn cách lắp ráp. o Dòng gundam với các chi tiết hoàn hảo. Các khớp cử động linh hoạt theo ý muốn. Người chơi sẽ thỏa sức sáng tạo và đam mê."
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

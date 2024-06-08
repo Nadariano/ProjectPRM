@@ -13,41 +13,34 @@
         android:theme="@style/Theme.GundamMobile"
         tools:targetApi="31" >
         <activity
-            android:name=".MainActivity2"
-            android:exported="false"
-            android:label="@string/title_activity_main2" />
-        <activity
-            android:name=".ChatActivity"
+            android:name=".ui.activity.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".AboutusActivity"
+            android:name=".ui.activity.AboutusActivity"
             android:exported="false" />
         <activity
-            android:name=".BillingActivity"
+            android:name=".ui.activity.BillingActivity"
             android:exported="false" />
         <activity
-            android:name=".OrderConfirmationActivity"
+            android:name=".ui.activity.OrderConfirmationActivity"
             android:exported="false" />
         <activity
-            android:name=".ShoppingCartActivity"
+            android:name=".ui.activity.ShoppingCartActivity"
             android:exported="false" />
         <activity
-            android:name=".ItemDetailActivity"
+            android:name=".ui.activity.ItemDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ItemListActivity"
+            android:name=".ui.activity.ItemListActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.activity.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
