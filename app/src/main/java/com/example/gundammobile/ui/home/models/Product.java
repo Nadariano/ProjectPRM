@@ -1,4 +1,4 @@
-package com.example.gundammobile.home.models;
+package com.example.gundammobile.ui.home.models;
 
 public class Product {
     private String productId;
@@ -40,6 +40,10 @@ public class Product {
         this.productImage = productImage;
         this.price = price;
 
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
     // Getters

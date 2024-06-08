@@ -15,7 +15,7 @@ import com.example.gundammobile.R;
 import com.example.gundammobile.databinding.FragmentBillBinding;
 import com.example.gundammobile.databinding.FragmentHomeBinding;
 import com.example.gundammobile.model.OrderDetails;
-import com.example.gundammobile.ui.home.HomeViewModel;
+//import com.example.gundammobile.ui.home.HomeViewModel;
 
 import java.util.ArrayList;
 

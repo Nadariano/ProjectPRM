@@ -1,4 +1,4 @@
-package com.example.gundammobile.home.adapters;
+package com.example.gundammobile.ui.home.adapters;
 
 
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gundammobile.R;
-import com.example.gundammobile.home.models.Coupon;
+import com.example.gundammobile.ui.home.models.Coupon;
 
 import java.util.List;
 

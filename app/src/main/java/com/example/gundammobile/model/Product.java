@@ -2,7 +2,7 @@ package com.example.gundammobile.model;
 
 public class Product {
     private String PRODUCT_ID, PRODUCTNAME, ORIGIN, PRODUCTDETAILS, PRODUCTMATERIAL,
-                   TYPE_ID, TYPENAME, RATIO, HEIGHT, BRANDNAME, PRODUCTIMAGE;
+            TYPE_ID, TYPENAME, RATIO, HEIGHT, BRANDNAME, PRODUCTIMAGE;
     private int BRAND_ID, QUANTITY;
 
     public String getPRODUCTIMAGE() {
