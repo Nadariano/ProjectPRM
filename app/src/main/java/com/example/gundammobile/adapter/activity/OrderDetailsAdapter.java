@@ -1,4 +1,4 @@
-package com.example.gundammobile.ui.activity;
+package com.example.gundammobile.adapter.activity;
 
 import android.content.Context;
 import android.net.Uri;

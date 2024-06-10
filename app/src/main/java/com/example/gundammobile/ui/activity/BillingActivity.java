@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gundammobile.R;
+import com.example.gundammobile.adapter.activity.OrderDetailsAdapter;
 import com.example.gundammobile.model.OrderDetails;
 
 import java.util.ArrayList;
