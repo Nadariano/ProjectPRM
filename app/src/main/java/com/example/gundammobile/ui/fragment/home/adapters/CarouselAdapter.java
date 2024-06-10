@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gundammobile.R;
-import com.example.gundammobile.ui.fragment.home.models.Product;
+import com.example.gundammobile.model.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -23,6 +23,7 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.Carous
 
     public interface OnItemClickListener {
         void onItemClick(Product product);
+
     }
 
     public CarouselAdapter(Context context, List<Product> products, OnItemClickListener listener) {
@@ -61,7 +62,7 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.Carous
 
         void bind(Product product, OnItemClickListener listener) {
             // Load product image using Picasso
-            Picasso.get().load(product.getProductImage()).into(carouselImageView);
+            Picasso.get().load(product.getPRODUCTIMAGE()).into(carouselImageView);
 
             // Set click listener for the carousel item
             this.listener = listener;
