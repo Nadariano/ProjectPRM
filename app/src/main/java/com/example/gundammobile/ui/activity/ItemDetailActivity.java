@@ -1,6 +1,7 @@
 package com.example.gundammobile.ui.activity;
 
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,7 +38,14 @@ public class ItemDetailActivity extends AppCompatActivity {
             return insets;
         });
 
-        fetchProductDetails("HG001"); //fetch by productId
+        String productId = getIntent().getStringExtra("PRODUCT_ID");
+        fetchProductDetails(productId);
+
+        ImageButton backButton = findViewById(R.id.productDetailBack);
+        backButton.setOnClickListener(v -> {
+            // This will close the current activity and go back to the previous one
+            finish();
+        });
     }
     private void fetchProductDetails(String productId) {
         // Create a Retrofit instance

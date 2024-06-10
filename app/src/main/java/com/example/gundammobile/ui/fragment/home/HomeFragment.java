@@ -66,8 +66,8 @@ public class HomeFragment extends Fragment {
                     CarouselAdapter carouselAdapter = new CarouselAdapter(requireContext(), products, product -> {
                         // Handle click on carousel item (e.g., show product details)
                         Intent detail = new Intent(getContext(), ItemDetailActivity.class);
+                        detail.putExtra("PRODUCT_ID", product.getPRODUCT_ID());
                         startActivity(detail);
-                        Toast.makeText(getContext(), "Clicked on: " + product.getPRODUCTNAME(), Toast.LENGTH_SHORT).show();
                     });
 
                     CarouselLayoutManager layoutManager = new CarouselLayoutManager();
@@ -77,6 +77,9 @@ public class HomeFragment extends Fragment {
                     // Update ProductsAdapter with the fetched product list
                     ProductsAdapter productsAdapter = new ProductsAdapter(products, product -> {
                         // Handle click on product item
+                        Intent detail = new Intent(getContext(), ItemDetailActivity.class);
+                        detail.putExtra("PRODUCT_ID", product.getPRODUCT_ID());
+                        startActivity(detail);
                     });
                     GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
                     rvProductList.setLayoutManager(gridLayoutManager);
