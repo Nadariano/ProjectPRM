@@ -1,5 +1,6 @@
 package com.example.gundammobile.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -76,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+        findViewById(R.id.cart_button_home).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create an Intent to start the CartActivity
+                Intent intent = new Intent(MainActivity.this, ShoppingCartActivity.class);
+                startActivity(intent);
+            }
+        });
 
         findViewById(R.id.filter_button).setOnClickListener(new View.OnClickListener() {
             @Override
