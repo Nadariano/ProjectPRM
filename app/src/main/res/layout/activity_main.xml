@@ -49,6 +49,15 @@
                 android:contentDescription="@string/filter"
                 android:src="@drawable/ic_filter"
                 android:scaleType="centerInside"/>
+            <ImageButton
+                android:id="@+id/cart_button_home"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/cart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="centerInside"/>
         </LinearLayout>
 
         <androidx.fragment.app.FragmentContainerView

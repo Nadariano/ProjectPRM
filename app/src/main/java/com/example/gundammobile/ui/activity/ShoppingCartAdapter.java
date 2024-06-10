@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder> {
+public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapter.CartViewHolder> {
 
     private List<CartItem> cartItems;
 
@@ -23,41 +23,37 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         this.cartItems = cartItems;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView productImage;
-        public TextView productName;
-        public TextView quantity;
-        public TextView unitPrice;
-
-        public ViewHolder(View view) {
-            super(view);
-            productImage = view.findViewById(R.id.productImage);
-            productName = view.findViewById(R.id.productName);
-            quantity = view.findViewById(R.id.quantity);
-            unitPrice = view.findViewById(R.id.unitPrice);
-        }
-    }
-
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.order_item_list, parent, false);
-        return new ViewHolder(view);
+    public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_item_list, parent, false);
+        return new CartViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CartItem item = cartItems.get(position);
-        Picasso.get().load(item.getProductImage()).into(holder.productImage);
-        holder.productName.setText(item.getProductName());
-        holder.quantity.setText(String.valueOf(item.getQuantity()));
-        holder.unitPrice.setText(String.valueOf(item.getUnitPrice()));
+    public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
+        CartItem cartItem = cartItems.get(position);
+        holder.productName.setText(cartItem.getProductName());
+        holder.productPrice.setText(String.valueOf(cartItem.getPrice()) + "$");
+        holder.productQuantity.setText(String.valueOf(cartItem.getQuantity()));
+        Picasso.get().load(cartItem.getProductImage()).into(holder.productImage);
     }
-
 
     @Override
     public int getItemCount() {
         return cartItems.size();
+    }
+
+    static class CartViewHolder extends RecyclerView.ViewHolder {
+        TextView productName, productPrice, productQuantity;
+        ImageView productImage;
+
+        CartViewHolder(@NonNull View itemView) {
+            super(itemView);
+            productName = itemView.findViewById(R.id.productName);
+            productPrice = itemView.findViewById(R.id.unitPrice);
+            productQuantity = itemView.findViewById(R.id.quantity);
+            productImage = itemView.findViewById(R.id.productImage);
+        }
     }
 }

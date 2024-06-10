@@ -1,29 +1,47 @@
 package com.example.gundammobile.model;
 
 public class CartItem {
-    private String productImage;
     private String productName;
+    private String productImage;
+    private double price;
     private int quantity;
-    private float unitPrice;
 
-    public CartItem(String productImage,String productName, int quantity, float unitPrice) {
-        this.productImage = productImage;
+    public CartItem(String productName, String productImage, double price, int quantity) {
         this.productName = productName;
+        this.productImage = productImage;
+        this.price = price;
         this.quantity = quantity;
-        this.unitPrice = unitPrice;
     }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
     public String getProductImage() {
         return productImage;
     }
-    public String getProductName() {
-        return productName;
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public float getUnitPrice() {
-        return unitPrice;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
