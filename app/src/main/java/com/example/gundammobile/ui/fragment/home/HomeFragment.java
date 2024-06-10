@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
                 .build();
 
         JSONPlaceholder jsonPlaceholder = retrofit.create(JSONPlaceholder.class);
-        Call<List<Product>> call = jsonPlaceholder.getProductList();
+        Call<List<Product>> call = jsonPlaceholder.getRandomProductList();
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {

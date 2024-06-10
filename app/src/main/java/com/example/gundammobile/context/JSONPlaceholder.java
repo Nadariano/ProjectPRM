@@ -15,6 +15,8 @@ public interface JSONPlaceholder {
     Call<Product> getProductDetail(@Query("productId") String productId);
     @GET("products")
     Call<List<Product>> getProductList();
+    @GET("products/random")
+    Call<List<Product>> getRandomProductList();
     @GET("discounts")
     Call<List<Coupon>> getCoupons();
 }
