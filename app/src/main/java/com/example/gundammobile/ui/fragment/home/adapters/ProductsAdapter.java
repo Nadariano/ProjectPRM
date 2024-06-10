@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gundammobile.R;
-import com.example.gundammobile.ui.fragment.home.models.Product;
+import com.example.gundammobile.model.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -62,9 +62,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
         void bind(Product product, OnItemClickListener listener) {
             // Load image using Picasso
-            Picasso.get().load(product.getProductImage()).into(ivProductImage);
-            tvItemTitle.setText(product.getProductName());
-            tvItemPrice.setText(String.valueOf(product.getPrice()));
+            Picasso.get().load(product.getPRODUCTIMAGE()).into(ivProductImage);
+            tvItemTitle.setText(product.getPRODUCTNAME());
+            tvItemPrice.setText(String.valueOf(product.getPRICE()));
             this.listener = listener;
         }
 
