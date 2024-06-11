@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
+import android.widget.Toast;
+import android.view.Menu;
 
 import com.example.gundammobile.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -24,7 +26,7 @@ import com.example.gundammobile.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private DrawerLayout drawerLayout;
+    public DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
     @Override
@@ -46,78 +48,116 @@ public class MainActivity extends AppCompatActivity {
         NavController navController;
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main2);
         if (navHostFragment != null) {
-            navController = navHostFragment.getNavController();
+
+
+//            // Handle search icon click
+//            toolbar.setOnMenuItemClickListener(item -> {
+//                if (item.getItemId() == R.id.action_search) {
+//                    navController.navigate(R.id.action_search);
+//                    return true;
+//                }
+//                return false;
+//            });
         } else {
             throw new RuntimeException("NavHostFragment not found");
         }
+        navController = navHostFragment.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        // Search View
-        SearchView searchView = findViewById(R.id.search_view);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                // Handle search query submission
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                // Handle text changes in search view
-                return false;
-            }
-        });
+//        // Search View
+//        SearchView searchView = findViewById(R.id.search_view);
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                // Handle search query submission
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                // Handle text changes in search view
+//                return false;
+//            }
+//        });
 
         // Drawer Layout and Navigation View for Filter
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigation_view);
+//        navigationView = findViewById(R.id.navigation_view);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        findViewById(R.id.cart_button_home).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create an Intent to start the CartActivity
-                Intent intent = new Intent(MainActivity.this, ShoppingCartActivity.class);
+
+
+        // Handle search icon click
+        toolbar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.search_view_header) {
+                // Navigate to SearchActivity
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        findViewById(R.id.filter_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.END);
-            }
-        });
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                // Handle navigation view item clicks here.
-                int id = item.getItemId();
-                switch (id) {
-//                    case R.id.filter_mg:
-//                        // Apply MG filter
-//                        break;
-//                    case R.id.filter_pg:
-//                        // Apply PG filter
-//                        break;
-//                    case R.id.action_show:
-//                        // Show filtered results
-//                        break;
-//                    case R.id.action_reset:
-//                        // Reset filters
-//                        break;
-                }
-                drawerLayout.closeDrawer(GravityCompat.END);
                 return true;
             }
+            if (item.getItemId() == R.id.cart_button_home) {
+                // Navigate to CartActivity
+                Intent intent = new Intent(MainActivity.this, ShoppingCartActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            return false;
         });
-    }
+//        findViewById(R.id.cart_button_home).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Create an Intent to start the CartActivity
+//                Intent intent = new Intent(MainActivity.this, ShoppingCartActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
+
+
+//        navigationView.setNavigationItemSelectedListener(item -> {
+//            // Handle navigation view item clicks here.
+//            int id = item.getItemId();
+//            // Handle filter menu items here if needed
+//            drawerLayout.closeDrawer(GravityCompat.END);
+//            return true;
+//        });
+
+
+//        findViewById(R.id.filter_button).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                drawerLayout.openDrawer(GravityCompat.END);
+//            }
+//        });
+//
+//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(MenuItem item) {
+//                // Handle navigation view item clicks here.
+//                int id = item.getItemId();
+//                switch (id) {
+////                    case R.id.filter_mg:
+////                        // Apply MG filter
+////                        break;
+////                    case R.id.filter_pg:
+////                        // Apply PG filter
+////                        break;
+////                    case R.id.action_show:
+////                        // Show filtered results
+////                        break;
+////                    case R.id.action_reset:
+////                        // Reset filters
+////                        break;
+//                }
+//                drawerLayout.closeDrawer(GravityCompat.END);
+//                return true;
+//            }
+//        });
+    }
     @Override
     public boolean onSupportNavigateUp() {
 //        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main2);
@@ -129,5 +169,10 @@ public class MainActivity extends AppCompatActivity {
             throw new RuntimeException("NavHostFragment not found");
         }
         return NavigationUI.navigateUp(navController, drawerLayout) || super.onSupportNavigateUp();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
     }
 }

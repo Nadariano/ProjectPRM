@@ -28,6 +28,9 @@
             android:name=".ui.activity.ShoppingCartActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.activity.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.ItemDetailActivity"
             android:exported="false" />
         <activity
