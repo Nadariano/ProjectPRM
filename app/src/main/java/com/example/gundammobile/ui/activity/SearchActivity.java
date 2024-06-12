@@ -1,5 +1,6 @@
 package com.example.gundammobile.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SearchView;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -15,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gundammobile.R;
 import com.example.gundammobile.context.JSONPlaceholder;
 import com.example.gundammobile.model.Product;
+import com.example.gundammobile.ui.fragment.home.adapters.CarouselAdapter;
 import com.example.gundammobile.ui.fragment.home.adapters.ProductsAdapter;
+import com.google.android.material.carousel.CarouselLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +55,10 @@ public class SearchActivity extends AppCompatActivity {
         productList.setLayoutManager(new GridLayoutManager(this, 2));
         productsAdapter = new ProductsAdapter(filteredProducts, product -> {
             // Handle item click (e.g., navigate to detail activity)
+            // Handle click on product item
+                Intent detail = new Intent(SearchActivity.this, ItemDetailActivity.class);
+                detail.putExtra("PRODUCT_ID", product.getPRODUCT_ID());
+                startActivity(detail);
         });
         productList.setAdapter(productsAdapter);
         fetchAllProducts();
@@ -87,7 +95,7 @@ public class SearchActivity extends AppCompatActivity {
                     allProducts = response.body();
                     filteredProducts.addAll(allProducts);
                     productsAdapter.notifyDataSetChanged();
-                } else {
+                }else {
                     Toast.makeText(SearchActivity.this, "Failed to fetch products", Toast.LENGTH_SHORT).show();
                 }
             }
