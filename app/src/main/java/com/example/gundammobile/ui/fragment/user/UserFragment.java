@@ -24,8 +24,16 @@ public class UserFragment extends Fragment {
         binding = FragmentUserBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-//        final TextView textView = binding.textUser;
-//        userViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        userViewModel.shouldShowFirstCard().observe(getViewLifecycleOwner(), shouldShow -> {
+            if (shouldShow) {
+                binding.guestCard.setVisibility(View.VISIBLE);
+                binding.userCard.setVisibility(View.GONE);
+            } else {
+                binding.guestCard.setVisibility(View.GONE);
+                binding.userCard.setVisibility(View.VISIBLE);
+            }
+        });
+
         return root;
     }
 

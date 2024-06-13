@@ -6,14 +6,16 @@ import androidx.lifecycle.ViewModel;
 
 public class UserViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    // This is just a placeholder for your condition.
+    // You might have a more complex logic to determine which card to show.
+    private MutableLiveData<Boolean> shouldShowFirstCard = new MutableLiveData<>();
 
-    public UserViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is user fragment");
+    public LiveData<Boolean> shouldShowFirstCard() {
+        return shouldShowFirstCard;
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    // Call this method to update the condition
+    public void setShouldShowFirstCard(boolean show) {
+        shouldShowFirstCard.setValue(show);
     }
 }
