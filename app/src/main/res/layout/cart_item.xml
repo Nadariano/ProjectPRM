@@ -27,15 +27,35 @@
         android:text="GundamName"
         android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/quantity"
-        android:layout_width="15dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:orientation="horizontal"
         android:layout_gravity="center"
         android:layout_weight="1"
-        android:gravity="center"
-        android:padding="5dp"
-        android:text="5" />
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/buttonDecrease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="5" />
+
+        <TextView
+            android:id="@+id/buttonIncrease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:padding="5dp"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/unitPrice"
@@ -46,11 +66,11 @@
         android:gravity="center"
         android:padding="2dp"
         android:text="150.000" />
+
     <ImageButton
         android:id="@+id/buttonDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/sharp_delete_forever_24"
-        />
+        android:src="@drawable/sharp_delete_forever_24" />
 </LinearLayout>

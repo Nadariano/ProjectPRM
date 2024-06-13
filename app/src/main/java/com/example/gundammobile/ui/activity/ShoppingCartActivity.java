@@ -38,7 +38,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
 
         loadCartItems();
 
-        cartAdapter = new ShoppingCartAdapter(cartItems, this);
+        cartAdapter = new ShoppingCartAdapter(this, cartItems, this);
         cartRecyclerView.setAdapter(cartAdapter);
 
         Button btnDeleteAll = findViewById(R.id.btnDelete);
@@ -77,10 +77,12 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
 
     @Override
     public void onItemRemove(int position) {
-        cartItems.remove(position);
-        cartAdapter.notifyItemRemoved(position);
-        saveCartItems();
-        Toast.makeText(this, "Item removed from cart", Toast.LENGTH_SHORT).show();
+        if (position >= 0 && position < cartItems.size()) {
+            cartItems.remove(position);
+            cartAdapter.notifyItemRemoved(position);
+            saveCartItems();
+            Toast.makeText(this, "Item removed from cart", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void saveCartItems() {
