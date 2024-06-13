@@ -3,14 +3,18 @@ package com.example.gundammobile.ui.activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -39,7 +43,11 @@ public class ItemDetailActivity extends AppCompatActivity {
     private static final String CART_PREFS = "cart_prefs";
     private static final String CART_ITEMS = "cart_items";
 
+    private FrameLayout loadingContainer;
+
     private Product product;
+
+    private ScrollView detailProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +60,28 @@ public class ItemDetailActivity extends AppCompatActivity {
             return insets;
         });
 
+        detailProduct = findViewById(R.id.detailProduct);
+        detailProduct.setVisibility(View.GONE); // ẩn detail product khi chưa fetch xong
+
+        loadingContainer = findViewById(R.id.loadingContainer);
+
+        // Show loading screen
+        showLoading(true);
+
         String productId = getIntent().getStringExtra("PRODUCT_ID");
         fetchProductDetails(productId);
 
         ImageButton backButton = findViewById(R.id.productDetailBack);
         backButton.setOnClickListener(v -> {
-            // This will close the current activity and go back to the previous one
             finish();
         });
 
         ImageButton addToCartButton = findViewById(R.id.addToCartButton);
         addToCartButton.setOnClickListener(v -> addToCart());
+    }
+
+    private void showLoading(boolean show) {
+        loadingContainer.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     private void fetchProductDetails(String productId) {
@@ -80,6 +99,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         call.enqueue(new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
+                showLoading(false);
                 if (response.isSuccessful() && response.body() != null) {
                     product = response.body();
                     // Update your TextViews with product details here
@@ -93,6 +113,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                     Picasso.get()
                             .load(product.getPRODUCTIMAGE())
                             .into(productImageView);
+                    detailProduct.setVisibility(View.VISIBLE); //Hiện detail product khi fetch xong
                 } else {
                     // Handle the case where the response is not successful
                     Toast.makeText(ItemDetailActivity.this, "Failed to fetch product details", Toast.LENGTH_SHORT).show();
@@ -101,6 +122,7 @@ public class ItemDetailActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Product> call, Throwable t) {
+                showLoading(false);
                 // Handle the case where the API call fails
                 Toast.makeText(ItemDetailActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
