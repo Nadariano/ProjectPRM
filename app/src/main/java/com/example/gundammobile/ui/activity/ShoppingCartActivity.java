@@ -20,7 +20,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCartActivity extends AppCompatActivity {
+public class ShoppingCartActivity extends AppCompatActivity implements ShoppingCartAdapter.OnItemRemoveListener {
 
     private static final String CART_PREFS = "cart_prefs";
     private static final String CART_ITEMS = "cart_items";
@@ -38,7 +38,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
         loadCartItems();
 
-        cartAdapter = new ShoppingCartAdapter(cartItems);
+        cartAdapter = new ShoppingCartAdapter(cartItems, this);
         cartRecyclerView.setAdapter(cartAdapter);
 
         Button btnDeleteAll = findViewById(R.id.btnDelete);
@@ -73,5 +73,22 @@ public class ShoppingCartActivity extends AppCompatActivity {
         cartAdapter.notifyDataSetChanged();
 
         Toast.makeText(this, "All items removed from cart", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemRemove(int position) {
+        cartItems.remove(position);
+        cartAdapter.notifyItemRemoved(position);
+        saveCartItems();
+        Toast.makeText(this, "Item removed from cart", Toast.LENGTH_SHORT).show();
+    }
+
+    private void saveCartItems() {
+        SharedPreferences sharedPreferences = getSharedPreferences(CART_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(cartItems);
+        editor.putString(CART_ITEMS, json);
+        editor.apply();
     }
 }
