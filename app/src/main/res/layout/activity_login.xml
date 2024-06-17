@@ -1,109 +1,144 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FFECE2"
-    android:id="@+id/main">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        android:id="@+id/header"
+    <!-- Background Image Layer -->
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#1F1C25"
-        android:elevation="2dp"
-        android:gravity="center"
-        android:visibility="gone">
+        android:layout_height="match_parent"
+        android:src="@drawable/background"
+        android:scaleType="centerCrop" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Demo Sign up"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp" />
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/text_signup_form"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:text="Sign Up Form"
-        android:textColor="#646464"
-        android:textSize="24sp" />
-
-    <EditText
-        android:id="@+id/etUsername"
+    <!-- Semi-transparent Black Overlay -->
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text_signup_form"
-        android:layout_marginLeft="15sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="15sp"
-        android:background="@drawable/rounded_edittext"
-        android:hint="Username"
-        android:paddingHorizontal="16dp"
-        android:textColorHint="#C8C8C8" />
+        android:layout_height="match_parent"
+        android:background="@drawable/overlay" />
 
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="383dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etUsername"
-        android:layout_alignStart="@+id/etUsername"
-        android:layout_alignEnd="@+id/etUsername"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="15sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="-1dp"
-        android:layout_marginRight="15sp"
-        android:background="@drawable/rounded_edittext_with_eye"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:paddingHorizontal="16dp"
-        android:textColorHint="#C8C8C8" />
-
-    <TextView
-        android:id="@+id/tvNotAccountYet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="15sp"
-        android:text="No account yet? Sign up."
-        android:textColor="#646464"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/text_or"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvNotAccountYet"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="15sp"
-        android:text="Or"
-        android:textColor="#646464"
-        android:textSize="16sp" />
-
-    <Button
-        android:id="@+id/btnSignIn"
+    <!-- Container for Gradient and White View -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text_or"
-        android:layout_marginLeft="15sp"
-        android:layout_marginTop="18dp"
-        android:layout_marginRight="15sp"
-        android:background="@drawable/rounded_button"
-        android:backgroundTint="#1F1C25"
-        android:elevation="4dp"
-        android:text="Sign In"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="@null" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <!-- Gradient Layer -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/gradient" />
+
+        <!-- White View Layer -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/white"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <RelativeLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#1F1C25"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Demo Sign up"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:fontFamily="sans-serif-medium" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/text_signup_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/header"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:text="Sign Up Form"
+                android:textColor="#646464"
+                android:textSize="24sp"
+                android:fontFamily="sans-serif-medium" />
+
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="15sp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="Username"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="#C8C8C8"
+                android:fontFamily="sans-serif" />
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="15sp"
+                android:background="@drawable/rounded_edittext_with_eye"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="#C8C8C8"
+                android:fontFamily="sans-serif" />
+            <TextView
+                android:id="@+id/tvNotAccountYet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="15sp"
+                android:gravity="center"
+                android:text="No account yet? Sign up."
+                android:textColor="#646464"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif" />
+
+            <TextView
+                android:id="@+id/text_or"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="15sp"
+                android:gravity="center"
+                android:text="Or"
+                android:textColor="#646464"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif" />
+
+
+            <Button
+                android:id="@+id/btnSignIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="15sp"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="#1F1C25"
+                android:elevation="4dp"
+                android:text="Sign In"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="#FFFFFF"
+                app:backgroundTint="@null" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
