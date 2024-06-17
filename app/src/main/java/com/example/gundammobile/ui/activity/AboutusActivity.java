@@ -2,6 +2,7 @@ package com.example.gundammobile.ui.activity;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -18,8 +19,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class AboutusActivity extends AppCompatActivity implements OnMapReadyCallback {
+    ImageButton backBtn;
     GoogleMap gMap;
     FrameLayout map;
     @Override
@@ -27,6 +30,9 @@ public class AboutusActivity extends AppCompatActivity implements OnMapReadyCall
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_aboutus);
+
+        backBtn = findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(v -> finish());
 
         map = findViewById(R.id.map);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
