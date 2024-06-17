@@ -22,6 +22,7 @@ import com.example.gundammobile.ui.fragment.home.adapters.ProductsAdapter;
 import com.example.gundammobile.model.Product;
 import com.example.gundammobile.model.Coupon;
 import com.google.android.material.carousel.CarouselLayoutManager;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,13 +43,14 @@ public class HomeFragment extends Fragment {
         RecyclerView rvCoupons = root.findViewById(R.id.rvCoupons);
         RecyclerView rvProductList = root.findViewById(R.id.rvProductList);
 
-        fetchProducts(rvCarousel, rvProductList);
+        fetchCarouselProducts(rvCarousel);
+        fetchProductList(rvProductList);
         fetchCoupons(rvCoupons);
 
         return root;
     }
 
-    private void fetchProducts(RecyclerView rvCarousel, RecyclerView rvProductList) {
+    private void fetchCarouselProducts(RecyclerView rvCarousel) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -73,6 +75,31 @@ public class HomeFragment extends Fragment {
                     CarouselLayoutManager layoutManager = new CarouselLayoutManager();
                     rvCarousel.setLayoutManager(layoutManager);
                     rvCarousel.setAdapter(carouselAdapter);
+                } else {
+                    Toast.makeText(getContext(), "Failed to fetch carousel products", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void fetchProductList(RecyclerView rvProductList) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        JSONPlaceholder jsonPlaceholder = retrofit.create(JSONPlaceholder.class);
+        Call<List<Product>> call = jsonPlaceholder.getProductList();
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Product> products = response.body();
 
                     // Update ProductsAdapter with the fetched product list
                     ProductsAdapter productsAdapter = new ProductsAdapter(products, product -> {
@@ -85,7 +112,7 @@ public class HomeFragment extends Fragment {
                     rvProductList.setLayoutManager(gridLayoutManager);
                     rvProductList.setAdapter(productsAdapter);
                 } else {
-                    Toast.makeText(getContext(), "Failed to fetch products", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Failed to fetch product list", Toast.LENGTH_SHORT).show();
                 }
             }
 
