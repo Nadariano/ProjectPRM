@@ -1,183 +1,217 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FFECE2"
-    android:id="@+id/main">
+    android:background="#FFECE2">
 
-    <!-- Header -->
-    <RelativeLayout
-        android:id="@+id/header"
+    <!-- Background Image Layer -->
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#1F1C25"
-        android:elevation="2dp"
-        android:gravity="center"
-        android:visibility="gone">
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Demo Register"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp" />
-    </RelativeLayout>
-
-    <!-- Sign Up Form Text -->
-    <TextView
-        android:id="@+id/text_signup_form"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:text="Register Form"
-        android:textColor="#646464"
-        android:textSize="24sp" />
-
-    <!-- Username Input -->
-    <EditText
-        android:id="@+id/etEmail"
+    <!-- Semi-transparent Black Overlay -->
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text_signup_form"
-        android:layout_marginLeft="15sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="15sp"
-        android:background="@drawable/rounded_edittext"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:textColorHint="#C8C8C8"
-        android:paddingHorizontal="16dp" />
+        android:layout_height="match_parent"
+        android:background="@drawable/overlay" />
 
-    <!-- First Name EditText -->
-
-    <!-- Last Name EditText -->
-<!--    <EditText-->
-<!--        android:id="@+id/etLastName"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/etFirstName"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:layout_marginLeft="15sp"-->
-<!--        android:layout_marginRight="15sp"-->
-<!--        android:background="@drawable/rounded_edittext"-->
-<!--        android:hint="Last Name"-->
-<!--        android:textColorHint="#C8C8C8"-->
-<!--        android:paddingHorizontal="16dp" />-->
-
-    <!-- Address EditText -->
-    <EditText
-        android:id="@+id/etFullName"
+    <!-- Container for Gradient and White View -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etEmail"
-        android:layout_marginLeft="15sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="15sp"
-        android:background="@drawable/rounded_edittext"
-        android:hint="Full Name"
-        android:paddingHorizontal="16dp"
-        android:textColorHint="#C8C8C8" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etFullName"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="15sp"
-        android:background="@drawable/rounded_edittext"
-        android:hint="Address"
-        android:textColorHint="#C8C8C8"
-        android:paddingHorizontal="16dp" />
+        <!-- Gradient Layer -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="0.1"
+            android:background="@drawable/gradient" />
 
-    <!-- Phone Number EditText -->
-    <EditText
-        android:id="@+id/etPhoneNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etAddress"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="15sp"
-        android:background="@drawable/rounded_edittext"
-        android:hint="Phone Number"
-        android:inputType="phone"
-        android:textColorHint="#C8C8C8"
-        android:paddingHorizontal="16dp" />
-    <!-- Password Input -->
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etPhoneNumber"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="15sp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textColorHint="#C8C8C8"
-        android:background="@drawable/rounded_edittext_with_eye"
-        android:paddingHorizontal="16dp" />
+        <!-- White View Layer -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/white"
+            android:orientation="vertical"
+            android:padding="16dp">
 
+            <!-- Header -->
+            <RelativeLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#1F1C25"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:visibility="gone">
 
-    <!-- Have an Account? Sign In -->
-    <EditText
-        android:id="@+id/etConfirmPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etPassword"
-        android:layout_marginLeft="15sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="15sp"
-        android:background="@drawable/rounded_edittext_with_eye"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
-        android:textColorHint="#C8C8C8"
-        android:paddingHorizontal="16dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Demo Register"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tvAlreadyAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etConfirmPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="15sp"
-        android:text="Have an account? Sign in."
-        android:textColor="#646464"
-        android:textSize="16sp" />
+            <!-- Register Form Text -->
+            <TextView
+                android:id="@+id/text_signup_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/header"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="Register Form"
+                android:textColor="#646464"
+                android:textSize="24sp" />
 
-    <!-- Or -->
-    <TextView
-        android:id="@+id/text_or"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvAlreadyAccount"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="15sp"
-        android:text="Or"
-        android:textColor="#646464"
-        android:textSize="16sp" />
+            <!-- Email Input -->
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_signup_form"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="15sp"
+                android:background="@drawable/rounded_edittext"
+                android:fontFamily="sans-serif"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="#C8C8C8" />
 
-    <!-- Register Button -->
-    <Button
-        android:id="@+id/btnSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text_or"
-        android:layout_marginLeft="15sp"
-        android:layout_marginTop="18dp"
-        android:layout_marginRight="15sp"
-        android:elevation="4dp"
-        android:text="Sign Up"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/rounded_button"
-        app:backgroundTint="@null" />
+            <!-- Full Name Input -->
+            <EditText
+                android:id="@+id/etFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/etEmail"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="15sp"
+                android:background="@drawable/rounded_edittext"
+                android:fontFamily="sans-serif"
+                android:hint="Full Name"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="#C8C8C8" />
+
+            <!-- Address Input -->
+            <EditText
+                android:id="@+id/etAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/etFullName"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="15sp"
+                android:background="@drawable/rounded_edittext"
+                android:fontFamily="sans-serif"
+                android:hint="Address"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="#C8C8C8" />
+
+            <!-- Phone Number Input -->
+            <EditText
+                android:id="@+id/etPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/etAddress"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="15sp"
+                android:background="@drawable/rounded_edittext"
+                android:fontFamily="sans-serif"
+                android:hint="Phone Number"
+                android:inputType="phone"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="#C8C8C8" />
+
+            <!-- Password Input -->
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/etPhoneNumber"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="15sp"
+                android:background="@drawable/rounded_edittext_with_eye"
+                android:fontFamily="sans-serif"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="#C8C8C8" />
+
+            <!-- Confirm Password Input -->
+            <EditText
+                android:id="@+id/etConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/etPassword"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="15sp"
+                android:background="@drawable/rounded_edittext_with_eye"
+                android:fontFamily="sans-serif"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:paddingHorizontal="16dp"
+                android:textColorHint="#C8C8C8" />
+
+            <!-- Have an Account? Sign In -->
+            <TextView
+                android:id="@+id/tvAlreadyAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/etConfirmPassword"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="Have an account? Sign in."
+                android:textColor="#646464"
+                android:textSize="16sp" />
+
+            <!-- Or -->
+            <TextView
+                android:id="@+id/text_or"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvAlreadyAccount"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="Or"
+                android:textColor="#646464"
+                android:textSize="16sp" />
+
+            <!-- Register Button -->
+            <Button
+                android:id="@+id/btnSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_or"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="15sp"
+                android:background="@drawable/rounded_button"
+                android:elevation="4dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Sign Up"
+                android:textColor="#FFFFFF"
+                app:backgroundTint="@null" />
+
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
