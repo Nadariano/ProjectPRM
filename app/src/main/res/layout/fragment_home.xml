@@ -1,16 +1,15 @@
-
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FFECE2"
+    android:background="#F5F5F5"
     tools:context=".ui.activity.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="10dp">
 
         <!-- Recommendations Header -->
         <TextView
@@ -19,21 +18,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Recommendation of the Day"
-            android:textColor="#1F1C25"
+            android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
-    <!--        <TextView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_centerInParent="true"-->
-    <!--            android:text="© 2024 eShop Inc."-->
-    <!--            android:textColor="#FFFFFF"-->
-    <!--            android:textSize="14sp" />-->
-    <!--    </RelativeLayout>-->
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- Carousel -->
         <androidx.recyclerview.widget.RecyclerView
@@ -43,9 +32,9 @@
             android:layout_marginTop="8dp"
             android:clipChildren="false"
             android:clipToPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/tvRecommendations"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvRecommendations"
             tools:listitem="@layout/carousel_item_layout" />
 
         <!-- Coupons Header -->
@@ -55,11 +44,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Exclusive Coupons"
-            android:textColor="#1F1C25"
+            android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/rvCarousel"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rvCarousel" />
 
         <!-- Coupons List -->
         <androidx.recyclerview.widget.RecyclerView
@@ -68,9 +57,9 @@
             android:layout_height="100dp"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/tvCoupons"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCoupons"
             tools:listitem="@layout/coupon_item" />
 
         <!-- Products Header -->
@@ -80,11 +69,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Popular Products"
-            android:textColor="#1F1C25"
+            android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/rvCoupons"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rvCoupons" />
 
         <!-- Product List -->
         <androidx.recyclerview.widget.RecyclerView
@@ -93,10 +82,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:overScrollMode="never"
-            app:layout_constraintTop_toBottomOf="@id/tvProducts"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvProducts"
             app:spanCount="2"
             tools:listitem="@layout/product_item_layout" />
 
