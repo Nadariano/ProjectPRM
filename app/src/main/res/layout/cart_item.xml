@@ -40,21 +40,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="-" />
+            android:text="-"
+            android:textSize="40sp" />
 
         <TextView
             android:id="@+id/quantity"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="5" />
+            android:text="5"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/buttonIncrease"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:text="+"
-            android:padding="5dp"/>
+            android:textSize="35sp" />
     </LinearLayout>
 
     <TextView
@@ -69,8 +72,10 @@
 
     <ImageButton
         android:id="@+id/buttonDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
         android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitCenter"
         android:src="@drawable/sharp_delete_forever_24" />
 </LinearLayout>

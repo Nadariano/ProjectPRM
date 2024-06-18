@@ -63,13 +63,13 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.CouponVi
             // Set dummy image (you can replace with actual image logic if available)
 //            ivCouponImage.setImageResource(R.drawable.ic_coupon_image_placeholder);
 
-            tvCouponTitle.setText("Coupon: " + coupon.getDiscountId());
-            tvDiscountRate.setText("Discount Rate: " + coupon.getDiscountRate() + "%");
+            tvCouponTitle.setText("Coupon: " + coupon.getDISCOUNTID());
+            tvDiscountRate.setText("Discount Rate: " + coupon.getDISCOUNTRATE() + "%");
 
             btnCopyCoupon.setOnClickListener(view -> {
                 Context context = view.getContext();
                 ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Coupon Code", coupon.getDiscountId());
+                ClipData clip = ClipData.newPlainText("Coupon Code", coupon.getDISCOUNTID());
                 clipboard.setPrimaryClip(clip);
                 Toast.makeText(context, "Coupon code copied to clipboard", Toast.LENGTH_SHORT).show();
             });
