@@ -147,7 +147,7 @@ public class ItemDetailActivity extends AppCompatActivity {
             cartItems = new ArrayList<>();
         }
 
-        CartItem cartItem = new CartItem(product.getPRODUCTNAME(), product.getPRODUCTIMAGE(), product.getPRICE(), 1);
+        CartItem cartItem = new CartItem(product.getPRODUCT_ID(),product.getPRODUCTNAME(), product.getPRODUCTIMAGE(), product.getPRICE(), 1);
         cartItems.add(cartItem);
 
         json = gson.toJson(cartItems);
