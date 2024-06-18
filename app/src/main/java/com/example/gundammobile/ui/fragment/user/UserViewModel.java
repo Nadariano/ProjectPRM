@@ -6,16 +6,20 @@ import androidx.lifecycle.ViewModel;
 
 public class UserViewModel extends ViewModel {
 
-    // This is just a placeholder for your condition.
-    // You might have a more complex logic to determine which card to show.
-    private MutableLiveData<Boolean> shouldShowFirstCard = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isLoggedIn = new MutableLiveData<>(true);
 
-    public LiveData<Boolean> shouldShowFirstCard() {
-        return shouldShowFirstCard;
+//    public UserViewModel() {
+//        if(isLoggedIn.getValue() == null){
+//        // Set initial value to false
+//        isLoggedIn.setValue(false);
+//        }
+//    }1
+
+    public LiveData<Boolean> getIsLoggedIn() {
+        return isLoggedIn;
     }
 
-    // Call this method to update the condition
-    public void setShouldShowFirstCard(boolean show) {
-        shouldShowFirstCard.setValue(show);
+    public void setIsLoggedIn(boolean loggedIn) {
+        isLoggedIn.setValue(loggedIn);
     }
 }
