@@ -30,7 +30,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.ShoppingCartActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ui.activity.SearchActivity"
             android:exported="false" />
