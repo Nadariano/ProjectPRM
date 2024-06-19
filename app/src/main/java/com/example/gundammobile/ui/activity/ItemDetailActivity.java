@@ -147,8 +147,20 @@ public class ItemDetailActivity extends AppCompatActivity {
             cartItems = new ArrayList<>();
         }
 
-        CartItem cartItem = new CartItem(product.getPRODUCT_ID(),product.getPRODUCTNAME(), product.getPRODUCTIMAGE(), product.getPRICE(), 1);
-        cartItems.add(cartItem);
+        CartItem cartItem = new CartItem(product.getPRODUCT_ID(), product.getPRODUCTNAME(), product.getPRODUCTIMAGE(), product.getPRICE(), 1);
+
+        boolean itemExists = false;
+        for (CartItem existingItem : cartItems) {
+            if (existingItem.getProductID().equals(cartItem.getProductID())) {
+                existingItem.setQuantity(existingItem.getQuantity() + 1);
+                itemExists = true;
+                break;
+            }
+        }
+
+        if (!itemExists) {
+            cartItems.add(cartItem);
+        }
 
         json = gson.toJson(cartItems);
         editor.putString(CART_ITEMS, json);
