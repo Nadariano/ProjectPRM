@@ -37,6 +37,7 @@ public class AboutusActivity extends AppCompatActivity implements OnMapReadyCall
         map = findViewById(R.id.map);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -47,6 +48,7 @@ public class AboutusActivity extends AppCompatActivity implements OnMapReadyCall
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.gMap=googleMap;
+        googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         LatLng mapNVHSV = new LatLng(10.8746573,106.8010552);
         this.gMap.addMarker(new MarkerOptions().position(mapNVHSV).title("Nhà Văn Hóa Sanh Viên ĐHQG TP.HCM"));
         this.gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapNVHSV,15));

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 public class UserViewModel extends ViewModel {
 
-    private MutableLiveData<Boolean> isLoggedIn = new MutableLiveData<>(true);
+    private MutableLiveData<Boolean> isLoggedIn = new MutableLiveData<>(false);
 
 //    public UserViewModel() {
 //        if(isLoggedIn.getValue() == null){
