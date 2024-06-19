@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,8 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     private RecyclerView cartRecyclerView;
     private ShoppingCartAdapter cartAdapter;
     private List<CartItem> cartItems;
+    private TextView txtTotalTemp;
+    private TextView txtTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +39,13 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         cartRecyclerView = findViewById(R.id.recyclerViewCart);
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        loadCartItems();
+        txtTotalTemp = findViewById(R.id.txtTotal_temp);
+        txtTotal = findViewById(R.id.txtTotal);
 
-        cartAdapter = new ShoppingCartAdapter(this, cartItems, this);
+        loadCartItems();
+        updateTotalPrice();
+
+        cartAdapter = new ShoppingCartAdapter(this, cartItems, this, this::updateTotalPrice);
         cartRecyclerView.setAdapter(cartAdapter);
 
         Button btnDeleteAll = findViewById(R.id.btnDelete);
@@ -71,8 +78,18 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
 
         cartItems.clear();
         cartAdapter.notifyDataSetChanged();
+        updateTotalPrice();
 
         Toast.makeText(this, "All items removed from cart", Toast.LENGTH_SHORT).show();
+    }
+
+    private void updateTotalPrice() {
+        double total = 0;
+        for (CartItem item : cartItems) {
+            total += item.getPrice() * item.getQuantity();
+        }
+        txtTotalTemp.setText(total + "$");
+        txtTotal.setText(total + "$"); // Update this if there are additional deductions or calculations
     }
 
     @Override
@@ -81,6 +98,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
             cartItems.remove(position);
             cartAdapter.notifyItemRemoved(position);
             saveCartItems();
+            updateTotalPrice();
             Toast.makeText(this, "Item removed from cart", Toast.LENGTH_SHORT).show();
         }
     }

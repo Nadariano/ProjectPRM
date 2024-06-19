@@ -24,15 +24,18 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     private List<CartItem> cartItems;
     private OnItemRemoveListener onItemRemoveListener;
     private Context context; // Added context field for SharedPreferences usage
-
+    private TotalPriceUpdater totalPriceUpdater;
     public interface OnItemRemoveListener {
         void onItemRemove(int position);
     }
-
-    public ShoppingCartAdapter(Context context, List<CartItem> cartItems, OnItemRemoveListener onItemRemoveListener) {
+    public interface TotalPriceUpdater {
+        void updateTotalPrice();
+    }
+    public ShoppingCartAdapter(Context context, List<CartItem> cartItems, OnItemRemoveListener onItemRemoveListener, TotalPriceUpdater totalPriceUpdater) {
         this.context = context;
         this.cartItems = cartItems;
         this.onItemRemoveListener = onItemRemoveListener;
+        this.totalPriceUpdater = totalPriceUpdater;
     }
 
     @NonNull
@@ -46,7 +49,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         CartItem cartItem = cartItems.get(position);
         holder.productName.setText(cartItem.getProductName());
-        holder.productPrice.setText(String.valueOf(cartItem.getPrice()) + "$");
+        holder.productPrice.setText(cartItem.getPrice() + "$");
         holder.productQuantity.setText(String.valueOf(cartItem.getQuantity()));
         Picasso.get().load(cartItem.getProductImage()).into(holder.productImage);
 
@@ -71,10 +74,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                         quantity--;
                         item.setQuantity(quantity);
                         holder.productQuantity.setText(String.valueOf(quantity));
-                        // Notify item changed
                         notifyItemChanged(adapterPosition);
-                        // Save the list to SharedPreferences (if needed)
                         saveCartItems();
+                        totalPriceUpdater.updateTotalPrice();
                     }
                 }
             }
@@ -90,10 +92,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                     quantity++;
                     item.setQuantity(quantity);
                     holder.productQuantity.setText(String.valueOf(quantity));
-                    // Notify item changed
                     notifyItemChanged(adapterPosition);
-                    // Save the list to SharedPreferences (if needed)
                     saveCartItems();
+                    totalPriceUpdater.updateTotalPrice();
                 }
             }
         });
@@ -130,4 +131,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         editor.putString("cart_items", json);
         editor.apply();
     }
+
+
 }
