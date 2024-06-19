@@ -1,6 +1,14 @@
 package com.example.gundammobile.ui.activity;
 
+import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,11 +17,16 @@ import android.widget.Toast;
 import android.view.Menu;
 
 import com.example.gundammobile.R;
+import com.example.gundammobile.model.CartItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -21,7 +34,14 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
 import com.example.gundammobile.databinding.ActivityMainBinding;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,9 +49,16 @@ public class MainActivity extends AppCompatActivity {
     public DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
+    //Check if there is any items in the cart
+    private static final String CART_PREFS = "cart_prefs";
+    private String CHANNEL_ID = "gundammobile_cart_noti";
+    private Integer NOTIFICATION_ID = 12345;
+    SharedPreferences cartPreference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -42,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         // For Bottom Navigation
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications,R.id.navigation_user)
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_user)
                 .build();
 //        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main2);
         NavController navController;
@@ -117,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
 
-
 //        navigationView.setNavigationItemSelectedListener(item -> {
 //            // Handle navigation view item clicks here.
 //            int id = item.getItemId();
@@ -157,6 +183,9 @@ public class MainActivity extends AppCompatActivity {
 //                return true;
 //            }
 //        });
+
+        //For displaying notifications for cart
+        cartNotification();
     }
     @Override
     public boolean onSupportNavigateUp() {
@@ -174,5 +203,49 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
+    }
+
+    private void cartNotification() {
+        cartPreference = getSharedPreferences(CART_PREFS, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = cartPreference.getString("cart_items", null);
+        Type type = new TypeToken<ArrayList<CartItem>>() {}.getType();
+        List<CartItem> cartItems = gson.fromJson(json, type);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "My Channel", NotificationManager.IMPORTANCE_DEFAULT);
+            // Customize channel settings (e.g., sound, vibration, etc.)
+            // ...
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+        // Check if the preferences are not null
+        if (cartItems != null) {
+            // Create a notification
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.icon_cart)
+                    .setContentTitle("GundamShop_MobileVersion")
+                    .setContentText("Có món hàng trong giỏ của bạn đang chờ thanh toán. Cùng xem nhé!")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setAutoCancel(true); // Auto-cancel the notification when clicked
+
+// Create an intent to open the cart activity (adjust this based on your app's structure)
+            Intent intent = new Intent(this, ShoppingCartActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+            builder.setContentIntent(pendingIntent);
+
+// Show the notification
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            notificationManager.notify(NOTIFICATION_ID, builder.build());
+        }
     }
 }
