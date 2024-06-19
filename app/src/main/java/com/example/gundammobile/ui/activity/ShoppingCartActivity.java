@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,13 +14,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gundammobile.R;
+import com.example.gundammobile.context.JSONPlaceholder;
 import com.example.gundammobile.model.CartItem;
+import com.example.gundammobile.model.Coupon;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ShoppingCartActivity extends AppCompatActivity implements ShoppingCartAdapter.OnItemRemoveListener {
 
@@ -30,6 +39,12 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     private List<CartItem> cartItems;
     private TextView txtTotalTemp;
     private TextView txtTotal;
+    private TextView txtDeduction;
+    private EditText edtDiscountCode;
+    private double discount = 0;
+
+    private static final String BASE_URL = "https://prm-be.vercel.app/api/v1/";
+    private Retrofit retrofit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +56,14 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
 
         txtTotalTemp = findViewById(R.id.txtTotal_temp);
         txtTotal = findViewById(R.id.txtTotal);
+        txtDeduction = findViewById(R.id.txtDeduction);
+        edtDiscountCode = findViewById(R.id.edtDiscountCode);
+
+        // Initialize Retrofit
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
         loadCartItems();
         updateTotalPrice();
@@ -55,7 +78,56 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
                 deleteAllItems();
             }
         });
+
+        EditText edtDiscountCode = findViewById(R.id.edtDiscountCode);
+        edtDiscountCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String discountCode = edtDiscountCode.getText().toString();
+                if (!discountCode.isEmpty()) {
+                    fetchAndApplyDiscount(discountCode);
+                } else {
+                    Toast.makeText(ShoppingCartActivity.this, "Please enter a discount code", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
+
+    private void fetchAndApplyDiscount(String discountCode) {
+        JSONPlaceholder jsonPlaceholder = retrofit.create(JSONPlaceholder.class);
+        Call<List<Coupon>> call = jsonPlaceholder.getCoupons();
+
+        call.enqueue(new Callback<List<Coupon>>() {
+            @Override
+            public void onResponse(Call<List<Coupon>> call, Response<List<Coupon>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Coupon> coupons = response.body();
+                    boolean couponApplied = false;
+                    for (Coupon coupon : coupons) {
+                        if (coupon.getDISCOUNTRATE() != 0 && coupon.getDISCOUNTID().equals(discountCode)) {
+                            discount = coupon.getDISCOUNTRATE();
+                            updateTotalPrice();
+                            txtDeduction.setText(String.format("%.2f%%", discount)); // Cập nhật hiển thị phần trăm giảm giá
+                            Toast.makeText(ShoppingCartActivity.this, "Discount applied", Toast.LENGTH_SHORT).show();
+                            couponApplied = true;
+                            break;
+                        }
+                    }
+                    if (!couponApplied) {
+                        Toast.makeText(ShoppingCartActivity.this, "Invalid discount code", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(ShoppingCartActivity.this, "Failed to retrieve discounts", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Coupon>> call, Throwable t) {
+                Toast.makeText(ShoppingCartActivity.this, "Failed to apply discount", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     private void loadCartItems() {
         SharedPreferences sharedPreferences = getSharedPreferences(CART_PREFS, Context.MODE_PRIVATE);
@@ -89,8 +161,15 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
             total += item.getPrice() * item.getQuantity();
         }
         txtTotalTemp.setText(total + "$");
-        txtTotal.setText(total + "$"); // Update this if there are additional deductions or calculations
+
+        double discountAmount = total * (discount / 100.0);
+        double totalAfterDiscount = total - discountAmount;
+
+        txtDeduction.setText(String.format("%.2f%%", discount)); // Hiển thị phần trăm giảm giá
+        txtTotal.setText(totalAfterDiscount + "$");
     }
+
+
 
     @Override
     public void onItemRemove(int position) {
