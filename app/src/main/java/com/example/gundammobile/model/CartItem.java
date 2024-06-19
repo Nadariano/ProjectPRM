@@ -1,16 +1,22 @@
 package com.example.gundammobile.model;
 
 public class CartItem {
+    private String productID;
     private String productName;
     private String productImage;
     private double price;
     private int quantity;
 
-    public CartItem(String productName, String productImage, double price, int quantity) {
+    public CartItem(String productID,String productName, String productImage, double price, int quantity) {
+        this.productID = productID;
         this.productName = productName;
         this.productImage = productImage;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public String getProductID() {
+        return productID;
     }
 
     public String getProductName() {
