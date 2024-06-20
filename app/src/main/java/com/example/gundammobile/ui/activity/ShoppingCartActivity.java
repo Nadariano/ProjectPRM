@@ -1,3 +1,4 @@
+// ShoppingCartActivity.java
 package com.example.gundammobile.ui.activity;
 
 import android.content.Context;
@@ -79,7 +80,14 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
             }
         });
 
-        EditText edtDiscountCode = findViewById(R.id.edtDiscountCode);
+        Button btnPaid = findViewById(R.id.btnPaid);
+        btnPaid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPaymentBottomSheet();
+            }
+        });
+
         edtDiscountCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +99,20 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
                 }
             }
         });
+    }
+
+    private void showPaymentBottomSheet() {
+        double totalAmount = getTotalAmount(); // Method to get the total amount
+        PaymentBottomSheet bottomSheet = new PaymentBottomSheet(this, totalAmount);
+        bottomSheet.show();
+    }
+
+    private double getTotalAmount() {
+        double total = 0;
+        for (CartItem item : cartItems) {
+            total += item.getPrice() * item.getQuantity();
+        }
+        return total - (total * (discount / 100.0));
     }
 
     private void fetchAndApplyDiscount(String discountCode) {
@@ -116,8 +138,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
                     if (!couponApplied) {
                         Toast.makeText(ShoppingCartActivity.this, "Invalid discount code", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(ShoppingCartActivity.this, "Failed to retrieve discounts", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -128,9 +148,8 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         });
     }
 
-
     private void loadCartItems() {
-        SharedPreferences sharedPreferences = getSharedPreferences(CART_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(CART_PREFS, MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(CART_ITEMS, null);
         Type type = new TypeToken<ArrayList<CartItem>>() {}.getType();
@@ -138,21 +157,23 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
 
         if (cartItems == null) {
             cartItems = new ArrayList<>();
-            Toast.makeText(this, "No items in cart", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void deleteAllItems() {
-        SharedPreferences sharedPreferences = getSharedPreferences(CART_PREFS, Context.MODE_PRIVATE);
+    private void saveCartItems() {
+        SharedPreferences sharedPreferences = getSharedPreferences(CART_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.remove(CART_ITEMS);
+        Gson gson = new Gson();
+        String json = gson.toJson(cartItems);
+        editor.putString(CART_ITEMS, json);
         editor.apply();
+    }
 
-        cartItems.clear();
-        cartAdapter.notifyDataSetChanged();
+    @Override
+    public void onItemRemove(int position) {
+        cartItems.remove(position);
+        cartAdapter.notifyItemRemoved(position);
         updateTotalPrice();
-
-        Toast.makeText(this, "All items removed from cart", Toast.LENGTH_SHORT).show();
     }
 
     private void updateTotalPrice() {
@@ -160,34 +181,14 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         for (CartItem item : cartItems) {
             total += item.getPrice() * item.getQuantity();
         }
-        txtTotalTemp.setText(total + "$");
 
-        double discountAmount = total * (discount / 100.0);
-        double totalAfterDiscount = total - discountAmount;
-
-        txtDeduction.setText(String.format("%.2f%%", discount)); // Hiển thị phần trăm giảm giá
-        txtTotal.setText(totalAfterDiscount + "$");
+        txtTotalTemp.setText(String.format("$%.2f", total));
+        txtTotal.setText(String.format("$%.2f", total - (total * (discount / 100.0))));
     }
 
-
-
-    @Override
-    public void onItemRemove(int position) {
-        if (position >= 0 && position < cartItems.size()) {
-            cartItems.remove(position);
-            cartAdapter.notifyItemRemoved(position);
-            saveCartItems();
-            updateTotalPrice();
-            Toast.makeText(this, "Item removed from cart", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void saveCartItems() {
-        SharedPreferences sharedPreferences = getSharedPreferences(CART_PREFS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(cartItems);
-        editor.putString(CART_ITEMS, json);
-        editor.apply();
+    private void deleteAllItems() {
+        cartItems.clear();
+        cartAdapter.notifyDataSetChanged();
+        updateTotalPrice();
     }
 }
