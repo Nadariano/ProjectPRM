@@ -26,6 +26,14 @@ public class User {
         this.ACCOUNT_PASS = ACCOUNT_PASS;
     }
 
+    //For taking user's info when log in successfully
+    public User(int ACCOUNT_ID, String ACCOUNT_NAME, String ACCOUNT_PHONE, String ACCOUNT_ADDRESS) {
+        this.ACCOUNT_ID = ACCOUNT_ID;
+        this.ACCOUNT_NAME = ACCOUNT_NAME;
+        this.ACCOUNT_PHONE = ACCOUNT_PHONE;
+        this.ACCOUNT_ADDRESS = ACCOUNT_ADDRESS;
+    }
+
     public String getEMAIL() {
         return EMAIL;
     }

@@ -40,14 +40,14 @@ public class Guest extends Fragment {
             // Handle login button click
             intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
-            userViewModel.setIsLoggedIn(true);
+//            userViewModel.setIsLoggedIn(true);
         });
 
         signupBtn.setOnClickListener(v -> {
             // Handle signup button click
             intent = new Intent(getActivity(), RegisterActivity.class);
             startActivity(intent);
-            userViewModel.setIsLoggedIn(true);
+//            userViewModel.setIsLoggedIn(true);
         });
 
         return root;

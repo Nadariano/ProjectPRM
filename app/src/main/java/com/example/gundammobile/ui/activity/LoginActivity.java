@@ -99,7 +99,6 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("accountAddress", accountAddress);
                         editor.apply();
 
-                        userViewModel.setIsLoggedIn(true);
 
                         Toast.makeText(LoginActivity.this, "Login success", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
