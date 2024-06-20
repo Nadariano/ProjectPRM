@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Close Button -->
+    <ImageButton
+        android:id="@+id/btnClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/close" />
+
+    <!-- Total Price -->
+    <TextView
+        android:id="@+id/txtTotalBottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Hình thức thanh toán"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- Payment Methods -->
+    <RadioGroup
+        android:id="@+id/radioGroupPayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="16dp">
+
+        <RadioButton
+            android:id="@+id/radioDirectPayment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thanh toán khi nhận hàng" />
+
+        <RadioButton
+            android:id="@+id/radioBanking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thanh toán bằng vnpay" />
+    </RadioGroup>
+
+    <!-- Confirm Button -->
+    <Button
+        android:id="@+id/btnConfirmPayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm Payment"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="#1F1C25"
+        android:layout_marginTop="16dp"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"/>
+</LinearLayout>
