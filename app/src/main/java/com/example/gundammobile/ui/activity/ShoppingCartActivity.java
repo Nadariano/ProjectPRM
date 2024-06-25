@@ -25,6 +25,7 @@ import com.example.gundammobile.R;
 import com.example.gundammobile.context.JSONPlaceholder;
 import com.example.gundammobile.model.CartItem;
 import com.example.gundammobile.model.Coupon;
+import com.example.gundammobile.model.User;
 import com.example.gundammobile.ui.fragment.user.UserViewModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -109,19 +110,12 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         ZaloPaySDK.init(553, Environment.SANDBOX);
         Button btnPaid = findViewById(R.id.btnPaid);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-//        userViewModel.getIsLoggedIn().observe(this, isLoggedIn -> {
-//            if(isLoggedIn){
-//                intent =new Intent(this, BillingActivity.class);
-//            } else{
-//                intent = new Intent(this, LoginActivity.class);
-//            }
-//            this.startActivity(intent);
-//        });
         btnPaid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                checkUser();
 //                showPaymentBottomSheet();
-                totalStr = (txtTotal.getText().toString()+"000").replace("$","");
+                totalStr = (txtTotal.getText().toString() + "000").replace("$", "");
                 Log.d("MyApp", "Total String: " + totalStr);
                 CreateOrder orderApi = new CreateOrder();
                 try {
@@ -135,22 +129,22 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
                         ZaloPaySDK.getInstance().payOrder(ShoppingCartActivity.this, token, "demozpdk://app", new PayOrderListener() {
                             @Override
                             public void onPaymentSucceeded(String s, String s1, String s2) {
-                                Intent intent1 = new Intent(ShoppingCartActivity.this,PaymentNotification.class);
-                                intent1.putExtra("result","Thanh toán thành công");
+                                Intent intent1 = new Intent(ShoppingCartActivity.this, PaymentNotification.class);
+                                intent1.putExtra("result", "Thanh toán thành công");
                                 startActivity(intent1);
                             }
 
                             @Override
                             public void onPaymentCanceled(String s, String s1) {
-                                Intent intent1 = new Intent(ShoppingCartActivity.this,PaymentNotification.class);
-                                intent1.putExtra("result","Hủy thanh toán");
+                                Intent intent1 = new Intent(ShoppingCartActivity.this, PaymentNotification.class);
+                                intent1.putExtra("result", "Hủy thanh toán");
                                 startActivity(intent1);
                             }
 
                             @Override
                             public void onPaymentError(ZaloPayError zaloPayError, String s, String s2) {
-                                Intent intent1 = new Intent(ShoppingCartActivity.this,PaymentNotification.class);
-                                intent1.putExtra("result","Thanh toán thất bại, có lỗi xảy ra");
+                                Intent intent1 = new Intent(ShoppingCartActivity.this, PaymentNotification.class);
+                                intent1.putExtra("result", "Thanh toán thất bại, có lỗi xảy ra");
                                 startActivity(intent1);
                             }
                         });
@@ -228,7 +222,8 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         SharedPreferences sharedPreferences = getSharedPreferences(CART_PREFS, MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(CART_ITEMS, null);
-        Type type = new TypeToken<ArrayList<CartItem>>() {}.getType();
+        Type type = new TypeToken<ArrayList<CartItem>>() {
+        }.getType();
         cartItems = gson.fromJson(json, type);
 
         if (cartItems == null) {
@@ -274,10 +269,19 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         cartItems.clear();
         cartAdapter.notifyDataSetChanged();
     }
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         ZaloPaySDK.getInstance().onResult(intent);
     }
 
+    private void checkUser() {
+        userViewModel.getIsLoggedIn().observe(this, isLoggedIn -> {
+            if (!isLoggedIn) {
+                intent = new Intent(this, LoginActivity.class);
+                this.startActivity(intent);
+            }
+        });
+    }
 }
