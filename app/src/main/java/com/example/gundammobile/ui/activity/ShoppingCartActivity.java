@@ -230,9 +230,12 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
 
     @Override
     public void onItemRemove(int position) {
-        cartItems.remove(position);
-        cartAdapter.notifyItemRemoved(position);
-        updateTotalPrice();
+        if (position >= 0 && position < cartItems.size()) {
+            cartItems.remove(position);
+            cartAdapter.notifyItemRemoved(position);
+            saveCartItems();
+            Toast.makeText(this, "Item removed from cart", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void updateTotalPrice() {
@@ -246,9 +249,13 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     }
 
     private void deleteAllItems() {
+        SharedPreferences sharedPreferences = getSharedPreferences(CART_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(CART_ITEMS);
+        editor.apply();
+
         cartItems.clear();
         cartAdapter.notifyDataSetChanged();
-        updateTotalPrice();
     }
     @Override
     protected void onNewIntent(Intent intent) {
