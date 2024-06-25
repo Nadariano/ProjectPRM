@@ -116,7 +116,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
 //            }
 //            this.startActivity(intent);
 //        });
-                Button btnPaid = findViewById(R.id.btnPaid);
         btnPaid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
