@@ -16,9 +16,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        flatDir {
+            dirs("zpdk-release")
+        }
     }
 }
 
 rootProject.name = "GundamMobile"
 include(":app")
- 
+include (":zpdk-release")
+include (":zpdk-release-3.1")
