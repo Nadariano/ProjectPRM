@@ -29,7 +29,6 @@ import org.json.JSONObject;
 import vn.zalopay.sdk.Environment;
 import vn.zalopay.sdk.ZaloPayError;
 import vn.zalopay.sdk.ZaloPaySDK;
-import vn.zalopay.sdk.listeners.PayOrderListener;
 
 public class PaymentBottomSheet extends BottomSheetDialog {
 

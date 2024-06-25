@@ -44,6 +44,7 @@ import vn.zalopay.sdk.Environment;
 import vn.zalopay.sdk.ZaloPayError;
 import vn.zalopay.sdk.ZaloPaySDK;
 import vn.zalopay.sdk.listeners.PayOrderListener;
+//import vn.zalopay.sdk.listeners.PayOrderListener;
 
 public class ShoppingCartActivity extends AppCompatActivity implements ShoppingCartAdapter.OnItemRemoveListener {
 
@@ -147,7 +148,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
                             }
 
                             @Override
-                            public void onPaymentError(ZaloPayError zaloPayError, String s, String s1) {
+                            public void onPaymentError(ZaloPayError zaloPayError, String s, String s2) {
                                 Intent intent1 = new Intent(ShoppingCartActivity.this,PaymentNotification.class);
                                 intent1.putExtra("result","Thanh toán thất bại, có lỗi xảy ra");
                                 startActivity(intent1);
