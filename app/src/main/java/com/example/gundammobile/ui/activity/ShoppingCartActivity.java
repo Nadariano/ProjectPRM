@@ -2,8 +2,10 @@
 package com.example.gundammobile.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,12 +16,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gundammobile.Api.CreateOrder;
 import com.example.gundammobile.R;
 import com.example.gundammobile.context.JSONPlaceholder;
 import com.example.gundammobile.model.CartItem;
 import com.example.gundammobile.model.Coupon;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -30,6 +35,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import vn.zalopay.sdk.Environment;
+import vn.zalopay.sdk.ZaloPayError;
+import vn.zalopay.sdk.ZaloPaySDK;
+import vn.zalopay.sdk.listeners.PayOrderListener;
 
 public class ShoppingCartActivity extends AppCompatActivity implements ShoppingCartAdapter.OnItemRemoveListener {
 
@@ -47,6 +56,8 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     private static final String BASE_URL = "https://prm-be.vercel.app/api/v1/";
     private Retrofit retrofit;
 
+
+    private String totalStr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,11 +91,58 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
             }
         });
 
+        //ZaloPay
+        StrictMode.ThreadPolicy policy = new
+                StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        // ZaloPay SDK Init
+        ZaloPaySDK.init(553, Environment.SANDBOX);
+        totalStr= txtTotal.getText().toString()+"000";
         Button btnPaid = findViewById(R.id.btnPaid);
         btnPaid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPaymentBottomSheet();
+
+//                showPaymentBottomSheet();
+
+                CreateOrder orderApi = new CreateOrder();
+                try {
+//                    JSONObject data = orderApi.createOrder(totalStr);
+                    JSONObject data = orderApi.createOrder("300000");
+                    String code = data.getString("returncode");
+//                        Toast.makeText(getApplicationContext(), "return_code: " + code, Toast.LENGTH_LONG).show();
+
+                    if (code.equals("1")) {
+                        String token = data.getString("zptranstoken");
+                        ZaloPaySDK.getInstance().payOrder(ShoppingCartActivity.this, token, "demozpdk://app", new PayOrderListener() {
+                            @Override
+                            public void onPaymentSucceeded(String s, String s1, String s2) {
+                                Intent intent1 = new Intent(ShoppingCartActivity.this,PaymentNotification.class);
+                                intent1.putExtra("result","Thanh toán thành công");
+                                startActivity(intent1);
+                            }
+
+                            @Override
+                            public void onPaymentCanceled(String s, String s1) {
+                                Intent intent1 = new Intent(ShoppingCartActivity.this,PaymentNotification.class);
+                                intent1.putExtra("result","Hủy thanh toán");
+                                startActivity(intent1);
+                            }
+
+                            @Override
+                            public void onPaymentError(ZaloPayError zaloPayError, String s, String s1) {
+                                Intent intent1 = new Intent(ShoppingCartActivity.this,PaymentNotification.class);
+                                intent1.putExtra("result","Thanh toán thất bại, có lỗi xảy ra");
+                                startActivity(intent1);
+                            }
+                        });
+
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -191,4 +249,10 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         cartAdapter.notifyDataSetChanged();
         updateTotalPrice();
     }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        ZaloPaySDK.getInstance().onResult(intent);
+    }
+
 }
