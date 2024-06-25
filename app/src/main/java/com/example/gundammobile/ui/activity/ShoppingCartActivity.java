@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -98,18 +99,17 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
 
         // ZaloPay SDK Init
         ZaloPaySDK.init(553, Environment.SANDBOX);
-        totalStr= txtTotal.getText().toString()+"000";
         Button btnPaid = findViewById(R.id.btnPaid);
         btnPaid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 //                showPaymentBottomSheet();
-
+                totalStr = (txtTotal.getText().toString()+"000").replace("$","");
+                Log.d("MyApp", "Total String: " + totalStr);
                 CreateOrder orderApi = new CreateOrder();
                 try {
-//                    JSONObject data = orderApi.createOrder(totalStr);
-                    JSONObject data = orderApi.createOrder("300000");
+                    JSONObject data = orderApi.createOrder(totalStr);
+//                    JSONObject data = orderApi.createOrder("300000");
                     String code = data.getString("returncode");
 //                        Toast.makeText(getApplicationContext(), "return_code: " + code, Toast.LENGTH_LONG).show();
 
@@ -140,8 +140,9 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
 
                     }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (Error | Exception e) {
+//                    e.printStackTrace();
+                    Toast.makeText(ShoppingCartActivity.this, "Lỗi: ", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -240,8 +241,8 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
             total += item.getPrice() * item.getQuantity();
         }
 
-        txtTotalTemp.setText(String.format("$%.2f", total));
-        txtTotal.setText(String.format("$%.2f", total - (total * (discount / 100.0))));
+        txtTotalTemp.setText(String.format("$%.0f", total));
+        txtTotal.setText(String.format("$%.0f", total - (total * (discount / 100.0))));
     }
 
     private void deleteAllItems() {
