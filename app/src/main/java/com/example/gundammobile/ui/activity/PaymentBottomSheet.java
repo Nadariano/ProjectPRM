@@ -14,9 +14,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.gundammobile.Api.CreateOrder;
 import com.example.gundammobile.R;
+import com.example.gundammobile.model.User;
+import com.example.gundammobile.ui.fragment.user.UserViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.json.JSONObject;
@@ -35,9 +40,14 @@ public class PaymentBottomSheet extends BottomSheetDialog {
 
     private double total;
     private String totalString;
+    private UserViewModel userViewModel;
+    private Intent intent;
+    private boolean loginCheck;
+    private TextView username;
 
     public PaymentBottomSheet(@NonNull Context context, double totalAmount) {
         super(context);
+        userViewModel = new ViewModelProvider((ViewModelStoreOwner) context).get(UserViewModel.class);
         setContentView(R.layout.bottom_sheet_payment);
         txtTotalBottomSheet = findViewById(R.id.txtTotalBottomSheet);
         radioGroupPayment = findViewById(R.id.radioGroupPayment);
@@ -56,6 +66,15 @@ public class PaymentBottomSheet extends BottomSheetDialog {
         total = 100000;
         totalString = String.format("%.0f", total);
 
+        username = findViewById(R.id.username);
+
+        userViewModel.getIsLoggedIn().observe(this, isLoggedIn -> {
+            if (isLoggedIn) {
+                loginCheck = true;
+            } else {
+                loginCheck = false;
+            }
+        });
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +90,7 @@ public class PaymentBottomSheet extends BottomSheetDialog {
                 if (selectedId == R.id.radioDirectPayment) {
 //                    intent = new Intent(context, MainActivity.class);
                     //physical nha
+                    createOrder(loginCheck, context);
                 } else {
 //                    intent = new Intent(context, MainActivity.class);
                     //online vnpay nha
@@ -119,4 +139,14 @@ public class PaymentBottomSheet extends BottomSheetDialog {
 
     }
 
+    private void createOrder(Boolean loginCheck, Context context) {
+        User user = userViewModel.getUser().getValue();
+        username.setText(user.getACCOUNT_NAME());
+            if(loginCheck){
+                intent =new Intent(context, BillingActivity.class);
+            } else{
+                intent = new Intent(context, LoginActivity.class);
+            }
+        context.startActivity(intent);
+    }
 }

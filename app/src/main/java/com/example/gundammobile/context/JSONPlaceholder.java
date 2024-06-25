@@ -1,6 +1,7 @@
 package com.example.gundammobile.context;
 
 import com.example.gundammobile.model.Coupon;
+import com.example.gundammobile.model.OrderDetails;
 import com.example.gundammobile.model.Product;
 import com.example.gundammobile.model.User;
 
@@ -26,5 +27,7 @@ public interface JSONPlaceholder {
     Call<User> registerUser(@Body User user);
     @POST("users/login")
     Call<User> loginUser(@Body User user);
+    @POST("orders")
+    Call<Object> createOrder(@Body Object order);
 }
 

@@ -14,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +25,7 @@ import com.example.gundammobile.R;
 import com.example.gundammobile.context.JSONPlaceholder;
 import com.example.gundammobile.model.CartItem;
 import com.example.gundammobile.model.Coupon;
+import com.example.gundammobile.ui.fragment.user.UserViewModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -59,6 +63,9 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
 
 
     private String totalStr;
+    private UserViewModel userViewModel;
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +107,16 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         // ZaloPay SDK Init
         ZaloPaySDK.init(553, Environment.SANDBOX);
         Button btnPaid = findViewById(R.id.btnPaid);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+//        userViewModel.getIsLoggedIn().observe(this, isLoggedIn -> {
+//            if(isLoggedIn){
+//                intent =new Intent(this, BillingActivity.class);
+//            } else{
+//                intent = new Intent(this, LoginActivity.class);
+//            }
+//            this.startActivity(intent);
+//        });
+                Button btnPaid = findViewById(R.id.btnPaid);
         btnPaid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

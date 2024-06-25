@@ -26,6 +26,11 @@
         android:textStyle="bold" />
 
     <!-- Payment Methods -->
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <RadioGroup
         android:id="@+id/radioGroupPayment"
         android:layout_width="match_parent"
