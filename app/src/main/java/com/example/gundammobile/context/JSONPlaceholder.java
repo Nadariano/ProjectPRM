@@ -1,10 +1,15 @@
 package com.example.gundammobile.context;
 
+import com.example.gundammobile.model.CartItem;
 import com.example.gundammobile.model.Coupon;
+import com.example.gundammobile.model.Order;
 import com.example.gundammobile.model.OrderDetails;
+import com.example.gundammobile.model.OrderRequest;
+import com.example.gundammobile.model.OrderResponse;
 import com.example.gundammobile.model.Product;
 import com.example.gundammobile.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -28,6 +33,6 @@ public interface JSONPlaceholder {
     @POST("users/login")
     Call<User> loginUser(@Body User user);
     @POST("orders")
-    Call<Object> createOrder(@Body Object order);
+    Call<OrderResponse> createOrder(@Body OrderRequest orderRequest);
 }
 

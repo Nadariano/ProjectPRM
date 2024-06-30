@@ -1,7 +1,9 @@
 package com.example.gundammobile.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 public class BillingActivity extends AppCompatActivity {
+    String orderId;
     ArrayList<OrderDetails> itemList;
     RecyclerView billItemList;
 
@@ -37,6 +40,12 @@ public class BillingActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        Intent intent = getIntent();
+        orderId = intent.getStringExtra("orderId");
+        TextView orderIdTextView = findViewById(R.id.orderId);
+        orderIdTextView.setText(orderId);
+
         billItemList = findViewById(R.id.billItemList);
 
         itemList = new ArrayList<>();

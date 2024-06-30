@@ -8,6 +8,13 @@ public class OrderDetails {
     private int QUANTITY;
     private float UNITPRICE;
 
+    public OrderDetails(int ORDER_ID, String PRODUCT_ID, int QUANTITY, float UNITPRICE) {
+        this.ORDER_ID = ORDER_ID;
+        this.PRODUCT_ID = PRODUCT_ID;
+        this.QUANTITY = QUANTITY;
+        this.UNITPRICE = UNITPRICE;
+    }
+
     public OrderDetails(int ORDER_ID, String PRODUCT_ID, String PRODUCTNAME, String PRODUCTIMAGE, int QUANTITY, float UNITPRICE) {
         this.ORDER_ID = ORDER_ID;
         this.PRODUCT_ID = PRODUCT_ID;

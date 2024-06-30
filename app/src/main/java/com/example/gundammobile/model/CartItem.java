@@ -4,10 +4,10 @@ public class CartItem {
     private String productID;
     private String productName;
     private String productImage;
-    private double price;
+    private float price;
     private int quantity;
 
-    public CartItem(String productID,String productName, String productImage, double price, int quantity) {
+    public CartItem(String productID,String productName, String productImage, float price, int quantity) {
         this.productID = productID;
         this.productName = productName;
         this.productImage = productImage;
@@ -39,7 +39,7 @@ public class CartItem {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
