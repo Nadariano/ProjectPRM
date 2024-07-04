@@ -34,5 +34,10 @@ public interface JSONPlaceholder {
     Call<User> loginUser(@Body User user);
     @POST("orders")
     Call<OrderResponse> createOrder(@Body OrderRequest orderRequest);
+    @GET("orders/info")
+    Call<Order> getOrderInfo(@Query("orderId") String orderId);
+    @GET("orders/details")
+    Call<ArrayList<OrderDetails>> getOrderDetails(@Query("orderId") String orderId);
+
 }
 

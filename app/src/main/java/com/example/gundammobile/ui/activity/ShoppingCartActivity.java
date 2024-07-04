@@ -125,12 +125,10 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
             @Override
             public void onClick(View v) {
                 checkUser();
-                String normalizedTotalStr = txtTotal.getText().toString().replace("$", "").replace(",", "");
+                String normalizedTotalStr = txtTotal.getText().toString().replace("$", "").replace(",", ".");
                 total = Float.parseFloat(normalizedTotalStr) * 1000;
-                totalStr = String.valueOf(total);
-//                showPaymentBottomSheet();
-//                generateZaloPayOrder();
-                createOrder();
+                totalStr = String.format("%.0f", total);
+                generateZaloPayOrder();
             }
         });
 
@@ -275,9 +273,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
                 ZaloPaySDK.getInstance().payOrder(ShoppingCartActivity.this, token, "demozpdk://app", new PayOrderListener() {
                     @Override
                     public void onPaymentSucceeded(String s, String s1, String s2) {
-                        Intent intent1 = new Intent(ShoppingCartActivity.this, PaymentNotification.class);
-                        intent1.putExtra("result", "Thanh toán thành công");
-                        startActivity(intent1);
+                        createOrder();
                     }
 
                     @Override
@@ -338,6 +334,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
                     if (response.isSuccessful()) {
                         OrderResponse orderResponse = response.body();
                         if (orderResponse != null) {
+                            deleteAllItems();
                             Toast.makeText(ShoppingCartActivity.this, orderResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
                             Intent intent1 = new Intent(ShoppingCartActivity.this, BillingActivity.class);
