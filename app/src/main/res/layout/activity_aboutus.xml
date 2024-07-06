@@ -13,18 +13,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="13dp"
         android:fontFamily="monospace"
         android:gravity="center"
         android:text="Về chúng tôi"
         android:textSize="25sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/backBtn"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.314" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/backBtn"
@@ -39,181 +36,185 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout7"
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:orientation="vertical"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backBtn">
+        app:layout_constraintTop_toBottomOf="@+id/textView36">
 
-        <TextView
-            android:id="@+id/textView15"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingStart="15dp"
-            android:text="Thông tin liên hệ"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content">
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:stretchColumns="*">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/linearLayout7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textView28"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Email:"
-                    android:textAlignment="viewEnd" />
-
-                <TextView
-                    android:id="@+id/textView29"
+                    android:id="@+id/textView15"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="gundamshop@gmail.com" />
-            </TableRow>
+                    android:layout_weight="1"
+                    android:paddingStart="15dp"
+                    android:text="Thông tin liên hệ"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textView30"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Số điện thoại:"
-                    android:textAlignment="viewEnd" />
-
-                <TextView
-                    android:id="@+id/textView31"
+                <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="0123-456-789" />
-            </TableRow>
+                    android:layout_weight="1"
+                    android:stretchColumns="*">
 
-            <TableRow
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView28"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="Email:"
+                            android:textAlignment="viewEnd" />
+
+                        <TextView
+                            android:id="@+id/textView29"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="gundamshop@gmail.com" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView30"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="Số điện thoại:"
+                            android:textAlignment="viewEnd" />
+
+                        <TextView
+                            android:id="@+id/textView31"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="0123-456-789" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView32"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="Fax:"
+                            android:textAlignment="viewEnd" />
+
+                        <TextView
+                            android:id="@+id/textView33"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="987-654-321" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView34"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="Địa chỉ"
+                            android:textAlignment="viewEnd" />
+
+                        <TextView
+                            android:id="@+id/textView35"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:lines="3"
+                            android:padding="5dp"
+                            android:singleLine="false"
+                            android:text="Lưu Hữu Phước, Đông Hoà, Dĩ An, Bình Dương, Vietnam" />
+                    </TableRow>
+
+                </TableLayout>
+
+            </LinearLayout>
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="0dp"
+                android:layout_height="350dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+
+            <TextView
+                android:id="@+id/textView8"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_weight="1"
+                android:paddingStart="15dp"
+                android:text="Xem thêm tại:"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/map" />
 
-                <TextView
-                    android:id="@+id/textView32"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Fax:"
-                    android:textAlignment="viewEnd" />
-
-                <TextView
-                    android:id="@+id/textView33"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="987-654-321" />
-            </TableRow>
-
-            <TableRow
+            <LinearLayout
+                android:id="@+id/linearLayout8"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8">
 
-                <TextView
-                    android:id="@+id/textView34"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Địa chỉ"
-                    android:textAlignment="viewEnd" />
+                <ImageButton
+                    android:id="@+id/fbIcon"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/facebook" />
 
-                <TextView
-                    android:id="@+id/textView35"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:lines="3"
-                    android:padding="5dp"
-                    android:singleLine="false"
-                    android:text="Lưu Hữu Phước, Đông Hoà, Dĩ An, Bình Dương, Vietnam" />
-            </TableRow>
+                <ImageButton
+                    android:id="@+id/ytbIcon"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/youtube" />
+            </LinearLayout>
 
-        </TableLayout>
-
-    </LinearLayout>
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="0dp"
-        android:layout_height="450dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_weight="1"
-        android:paddingStart="15dp"
-        android:text="Xem thêm tại:"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/map" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8">
-
-        <ImageButton
-            android:id="@+id/fbIcon"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/facebook" />
-
-        <ImageButton
-            android:id="@+id/ytbIcon"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/youtube" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:text="App này được tạo bởi nhóm 4_PRM392"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

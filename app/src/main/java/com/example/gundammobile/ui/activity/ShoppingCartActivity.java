@@ -242,6 +242,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
 
         cartItems.clear();
         cartAdapter.notifyDataSetChanged();
+        updateTotalPrice();
     }
 
     @Override
