@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.gundammobile.databinding.FragmentLoggedInUserBinding;
 import com.example.gundammobile.model.User;
 import com.example.gundammobile.ui.activity.ShoppingCartActivity;
+import com.example.gundammobile.ui.fragment.dashboard.DashboardFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
@@ -52,6 +53,8 @@ public class LoggedInUser extends Fragment {
 
         viewOrderHistoryBtn.setOnClickListener(v -> {
             // Handle view order history button click
+            intent = new Intent(getActivity(), DashboardFragment.class);
+            startActivity(intent);
         });
 
         logoutBtn.setOnClickListener(v -> {

@@ -38,6 +38,8 @@ public interface JSONPlaceholder {
     Call<Order> getOrderInfo(@Query("orderId") String orderId);
     @GET("orders/details")
     Call<ArrayList<OrderDetails>> getOrderDetails(@Query("orderId") String orderId);
+    @GET("orders")
+    Call<ArrayList<Order>> getOrdersByAccountId(@Query("accountId ") Integer accountId);
 
 }
 

@@ -117,7 +117,7 @@ public class BillingActivity extends AppCompatActivity {
                     ((TextView) findViewById(R.id.accountName)).setText(order.getACCOUNT_NAME());
 
                     // Format the Date object to a String
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                     String formattedDate = sdf.format(order.getORDER_DATE());
                     ((TextView) findViewById(R.id.createdDate)).setText(formattedDate);
                     ((TextView) findViewById(R.id.totalMoney)).setText(String.valueOf(order.getTOTALMONEY()));
