@@ -18,6 +18,8 @@ import android.view.Menu;
 
 import com.example.gundammobile.R;
 import com.example.gundammobile.model.CartItem;
+import com.example.gundammobile.model.User;
+import com.example.gundammobile.ui.fragment.user.UserViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -29,6 +31,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -55,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
     private Integer NOTIFICATION_ID = 12345;
     SharedPreferences cartPreference;
 
+    private UserViewModel userViewModel;
+    private User user;
+    private boolean loggedIn;
+    BottomNavigationView navView;
+    NavController navController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,13 +75,13 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         // For Bottom Navigation
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_user)
                 .build();
 //        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main2);
-        NavController navController;
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main2);
         if (navHostFragment != null) {
 
@@ -90,7 +99,20 @@ public class MainActivity extends AppCompatActivity {
         }
         navController = navHostFragment.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        checkIsLoggedIn();
+//        if (loggedIn) {
+//            Menu menu = navView.getMenu();
+//            MenuItem removedItem = menu.findItem(R.id.navigation_dashboard);
+//            removedItem.setEnabled(false);
+//            removedItem.setVisible(false);
+//        }
+//        else {
+//            Menu menu = navView.getMenu();
+//            MenuItem removedItem = menu.findItem(R.id.navigation_dashboard);
+//            removedItem.setEnabled(true);
+//            removedItem.setVisible(true);
+//        }
+//        NavigationUI.setupWithNavController(navView, navController);
 
 //        // Search View
 //        SearchView searchView = findViewById(R.id.search_view);
@@ -187,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
         //For displaying notifications for cart
         cartNotification();
     }
+
     @Override
     public boolean onSupportNavigateUp() {
 //        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main2);
@@ -199,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return NavigationUI.navigateUp(navController, drawerLayout) || super.onSupportNavigateUp();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
@@ -209,7 +233,8 @@ public class MainActivity extends AppCompatActivity {
         cartPreference = getSharedPreferences(CART_PREFS, Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = cartPreference.getString("cart_items", null);
-        Type type = new TypeToken<ArrayList<CartItem>>() {}.getType();
+        Type type = new TypeToken<ArrayList<CartItem>>() {
+        }.getType();
         List<CartItem> cartItems = gson.fromJson(json, type);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "My Channel", NotificationManager.IMPORTANCE_DEFAULT);
@@ -247,5 +272,41 @@ public class MainActivity extends AppCompatActivity {
             }
             notificationManager.notify(NOTIFICATION_ID, builder.build());
         }
+    }
+
+    private void checkIsLoggedIn() {
+        userViewModel.getIsLoggedIn().observe(this, isLoggedIn -> {
+            if(!isLoggedIn){
+                Menu menu = navView.getMenu();
+                MenuItem removedItem = menu.findItem(R.id.navigation_dashboard);
+                removedItem.setEnabled(false);
+                removedItem.setVisible(false);
+            }
+            else {
+                Menu menu = navView.getMenu();
+                MenuItem unremovedItem = menu.findItem(R.id.navigation_dashboard);
+                unremovedItem.setEnabled(true);
+                unremovedItem.setVisible(true);
+            }
+        });
+//        if (loggedIn) {
+//            Menu menu = navView.getMenu();
+//            MenuItem removedItem = menu.findItem(R.id.navigation_dashboard);
+//            removedItem.setEnabled(false);
+//            removedItem.setVisible(false);
+//        }
+//        else {
+//            Menu menu = navView.getMenu();
+//            MenuItem removedItem = menu.findItem(R.id.navigation_dashboard);
+//            removedItem.setEnabled(true);
+//            removedItem.setVisible(true);
+//        }
+        NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkIsLoggedIn();
     }
 }

@@ -76,48 +76,51 @@ public class DashboardFragment extends Fragment {
     }
 
     private void getOrdersByAccountId() {
-        // Create a Retrofit instance
-        user = userViewModel.getUser().getValue();
+        try{
+            // Create a Retrofit instance
+            user = userViewModel.getUser().getValue();
 
-        int accountId = Objects.requireNonNull(user).getACCOUNT_ID();
+            int accountId = Objects.requireNonNull(user).getACCOUNT_ID();
 
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Date.class, new DateDeserializer())
-                .create();
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Date.class, new DateDeserializer())
+                    .create();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
 
-        // Create an instance of the JSONPlaceholder interface
-        JSONPlaceholder jsonPlaceholder = retrofit.create(JSONPlaceholder.class);
+            // Create an instance of the JSONPlaceholder interface
+            JSONPlaceholder jsonPlaceholder = retrofit.create(JSONPlaceholder.class);
 
-        Call<ArrayList<Order>> call = jsonPlaceholder.getOrdersByAccountId(accountId);
-        call.enqueue(new Callback<ArrayList<Order>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Order>> call, Response<ArrayList<Order>> response) {
-                showLoading(false);
-                if (response.isSuccessful() && response.body() != null) {
-                    ArrayList<Order> orders = response.body();
-                    itemList = orders;
-                    orderInfoAdapter = new OrderInfoAdapter(itemList);
-                    orderList.setAdapter(orderInfoAdapter);
-                    orderList.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
-                    orderListLayout.setVisibility(View.VISIBLE);
-                } else {
-                    Toast.makeText(binding.getRoot().getContext(), "Failed to fetch order details", Toast.LENGTH_SHORT).show();
+            Call<ArrayList<Order>> call = jsonPlaceholder.getOrdersByAccountId(accountId);
+            call.enqueue(new Callback<ArrayList<Order>>() {
+                @Override
+                public void onResponse(Call<ArrayList<Order>> call, Response<ArrayList<Order>> response) {
+                    showLoading(false);
+                    if (response.isSuccessful() && response.body() != null) {
+                        ArrayList<Order> orders = response.body();
+                        itemList = orders;
+                        orderInfoAdapter = new OrderInfoAdapter(itemList);
+                        orderList.setAdapter(orderInfoAdapter);
+                        orderList.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
+                        orderListLayout.setVisibility(View.VISIBLE);
+                    } else {
+                        Toast.makeText(binding.getRoot().getContext(), "Failed to fetch order details", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ArrayList<Order>> call, Throwable t) {
-                showLoading(false);
-                Toast.makeText(binding.getRoot().getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                t.printStackTrace();
-            }
-        });
-
+                @Override
+                public void onFailure(Call<ArrayList<Order>> call, Throwable t) {
+                    showLoading(false);
+                    Toast.makeText(binding.getRoot().getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    t.printStackTrace();
+                }
+            });
+        } catch (Exception e){
+            Toast.makeText(binding.getRoot().getContext(), "Bạn chưa đăng nhập: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
