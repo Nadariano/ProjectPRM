@@ -78,6 +78,9 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:background="@drawable/rounded_button"
+                    android:backgroundTint="#1F1C25"
+                    app:backgroundTint="@null"
                     android:text="Đăng nhập" />
 
                 <TextView
@@ -98,6 +101,9 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:background="@drawable/rounded_button"
+                    android:backgroundTint="#1F1C25"
+                    app:backgroundTint="@null"
                     android:text="Đăng kí tài khoản" />
             </LinearLayout>
 

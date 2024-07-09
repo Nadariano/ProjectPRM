@@ -14,7 +14,16 @@
         android:layout_height="wrap_content">
 
     <!-- Title for the shopping cart -->
-    <TextView
+        <ImageButton
+            android:id="@+id/backBtn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_arrow_back_24" />
+
+        <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,164 +39,176 @@
 
     <!-- Layout to contain buttons -->
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewCart"
-        android:layout_width="414dp"
-        android:layout_height="385dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonsLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
-        app:layout_constraintVertical_bias="0.038"
-        tools:listitem="@layout/order_item_list" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewCart"
+            android:layout_width="414dp"
+            android:layout_height="385dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:padding="25dp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonsLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTextView"
+            app:layout_constraintVertical_bias="0.038"
+            tools:listitem="@layout/order_item_list" />
 
-    <LinearLayout
-        android:id="@+id/buttonsLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside">
-
-        <!-- Checkout button -->
-        <Button
-            android:id="@+id/btnPaid"
+        <LinearLayout
+            android:id="@+id/buttonsLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="Thanh toán" />
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent">
 
-        <!-- Button -->
-        <Button
-            android:id="@+id/btnDelete"
+            <!-- Checkout button -->
+            <Button
+                android:id="@+id/btnPaid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="#1F1C25"
+                android:text="Thanh toán"
+                android:textSize="12sp"
+                app:backgroundTint="@null" />
+
+            <!-- Button -->
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="#1F1C25"
+                android:text="Làm trống giỏ hàng"
+                android:textSize="12sp"
+                app:backgroundTint="@null" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Làm trống giỏ hàng" />
+            android:layout_marginBottom="248dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical|start"
+                android:text="Tổng tiền (tạm tính)" />
 
-    <LinearLayout
-        android:layout_width="412dp"
-        android:layout_height="20dp"
-        android:layout_marginBottom="248dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent">
+            <TextView
+                android:id="@+id/txtTotal_temp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="56dp"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical|start"
+                android:text="1000$" />
 
-        <TextView
-            android:id="@+id/textView11"
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical|start"
-            android:text="Tổng tiền (tạm tính)" />
+            android:layout_marginBottom="184dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonsLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/txtTotal_temp"
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical|start"
+                android:text="Nhập mã Discount" />
+
+            <EditText
+                android:id="@+id/edtDiscountCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="56dp"
+                android:layout_weight="0.5"
+                android:singleLine="true"
+                android:gravity="center_vertical|start" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="56dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical|start"
-            android:text="1000$" />
+            android:layout_marginBottom="148dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonsLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical|start"
+                android:text="Khấu trừ" />
 
-    <LinearLayout
-        android:layout_width="411dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="184dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonsLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+            <TextView
+                android:id="@+id/txtDeduction"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="56dp"
+                android:layout_weight="0.5" />
 
-        <TextView
-            android:id="@+id/textView27"
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical|start"
-            android:text="Nhập mã Discount" />
+            android:layout_marginBottom="112dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonsLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent">
 
-        <EditText
-            android:id="@+id/edtDiscountCode"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="56dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical|start" />
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical|start"
+                android:text="Tổng thanh toán" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="412dp"
-        android:layout_height="20dp"
-        android:layout_marginBottom="148dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonsLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/textView38"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical|start"
-            android:text="Khấu trừ" />
-
-        <TextView
-            android:id="@+id/txtDeduction"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="412dp"
-        android:layout_height="20dp"
-        android:layout_marginBottom="112dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonsLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/textView40"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical|start"
-            android:text="Tổng thanh toán" />
-
-        <TextView
-            android:id="@+id/txtTotal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="800$" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/txtTotal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="56dp"
+                android:layout_weight="0.5"
+                android:text="800$" />
+        </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

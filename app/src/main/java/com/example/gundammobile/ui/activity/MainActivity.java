@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         // For Bottom Navigation
         navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_user)
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_user)
                 .build();
 //        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main2);
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main2);
@@ -100,35 +100,6 @@ public class MainActivity extends AppCompatActivity {
         navController = navHostFragment.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         checkIsLoggedIn();
-//        if (loggedIn) {
-//            Menu menu = navView.getMenu();
-//            MenuItem removedItem = menu.findItem(R.id.navigation_dashboard);
-//            removedItem.setEnabled(false);
-//            removedItem.setVisible(false);
-//        }
-//        else {
-//            Menu menu = navView.getMenu();
-//            MenuItem removedItem = menu.findItem(R.id.navigation_dashboard);
-//            removedItem.setEnabled(true);
-//            removedItem.setVisible(true);
-//        }
-//        NavigationUI.setupWithNavController(navView, navController);
-
-//        // Search View
-//        SearchView searchView = findViewById(R.id.search_view);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                // Handle search query submission
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                // Handle text changes in search view
-//                return false;
-//            }
-//        });
 
         // Drawer Layout and Navigation View for Filter
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -156,55 +127,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
-//        findViewById(R.id.cart_button_home).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // Create an Intent to start the CartActivity
-//                Intent intent = new Intent(MainActivity.this, ShoppingCartActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
-
-//        navigationView.setNavigationItemSelectedListener(item -> {
-//            // Handle navigation view item clicks here.
-//            int id = item.getItemId();
-//            // Handle filter menu items here if needed
-//            drawerLayout.closeDrawer(GravityCompat.END);
-//            return true;
-//        });
-
-
-//        findViewById(R.id.filter_button).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                drawerLayout.openDrawer(GravityCompat.END);
-//            }
-//        });
-//
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(MenuItem item) {
-//                // Handle navigation view item clicks here.
-//                int id = item.getItemId();
-//                switch (id) {
-////                    case R.id.filter_mg:
-////                        // Apply MG filter
-////                        break;
-////                    case R.id.filter_pg:
-////                        // Apply PG filter
-////                        break;
-////                    case R.id.action_show:
-////                        // Show filtered results
-////                        break;
-////                    case R.id.action_reset:
-////                        // Reset filters
-////                        break;
-//                }
-//                drawerLayout.closeDrawer(GravityCompat.END);
-//                return true;
-//            }
-//        });
 
         //For displaying notifications for cart
         cartNotification();

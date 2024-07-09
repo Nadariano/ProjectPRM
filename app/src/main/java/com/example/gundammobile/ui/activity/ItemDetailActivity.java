@@ -76,7 +76,7 @@ public class ItemDetailActivity extends AppCompatActivity {
             finish();
         });
 
-        ImageButton addToCartButton = findViewById(R.id.addToCartButton);
+        Button addToCartButton = findViewById(R.id.addToCartButton);
         addToCartButton.setOnClickListener(v -> addToCart());
     }
 

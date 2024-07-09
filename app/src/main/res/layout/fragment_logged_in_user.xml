@@ -81,8 +81,12 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="#1F1C25"
             android:gravity="center"
-            android:text="Giỏ hàng của tôi" />
+            android:text="Giỏ hàng của tôi"
+            app:backgroundTint="@null" />
 
         <Button
             android:id="@+id/viewOrderHistoryBtn"
@@ -90,6 +94,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="#1F1C25"
+            app:backgroundTint="@null"
             android:text="Lịch sử mua hàng của tôi" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

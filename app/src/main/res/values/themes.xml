@@ -3,6 +3,10 @@
     <style name="Base.Theme.GundamMobile" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/design_default_color_secondary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/black</item>
     </style>
 
     <style name="Theme.GundamMobile" parent="Base.Theme.GundamMobile" />

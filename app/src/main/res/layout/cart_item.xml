@@ -4,36 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/orderItem"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
 
     <ImageView
         android:id="@+id/productImage"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
+        android:layout_width="40dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_weight="1"
-        android:padding="5dp"
-        android:scaleType="fitXY" />
+        android:layout_weight="0.5"
+        android:padding="10dp"
+        android:scaleType="center" />
 
     <TextView
         android:id="@+id/productName"
-        android:layout_width="150dp"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
+        android:ellipsize="end"
         android:gravity="center"
-        android:lines="5"
+        android:maxLines="1"
         android:padding="5dp"
         android:text="GundamName"
-        android:textSize="15sp" />
+        android:textSize="12sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_weight="1"
-        android:gravity="center">
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/buttonDecrease"
@@ -41,7 +43,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:text="-"
-            android:textSize="40sp" />
+            android:textSize="35sp" />
 
         <TextView
             android:id="@+id/quantity"
@@ -49,7 +51,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="5"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/buttonIncrease"
@@ -57,7 +59,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:text="+"
-            android:textSize="35sp" />
+            android:textSize="30sp" />
     </LinearLayout>
 
     <TextView
@@ -72,9 +74,10 @@
 
     <ImageButton
         android:id="@+id/buttonDelete"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_gravity="center"
+        android:layout_weight="1"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:scaleType="fitCenter"
         android:src="@drawable/sharp_delete_forever_24" />

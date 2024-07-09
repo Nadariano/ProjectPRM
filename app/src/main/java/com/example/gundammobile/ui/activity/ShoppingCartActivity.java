@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,7 +72,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
     private Retrofit retrofit;
 
 
-    private String totalStr;
+    private String totalStr = "0";
     private float total;
     private UserViewModel userViewModel;
     private User user;
@@ -91,6 +92,11 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         txtTotal = findViewById(R.id.txtTotal);
         txtDeduction = findViewById(R.id.txtDeduction);
         edtDiscountCode = findViewById(R.id.edtDiscountCode);
+
+        ImageButton backButton = findViewById(R.id.backBtn2);
+        backButton.setOnClickListener(v -> {
+            finish();
+        });
 
         // Initialize Retrofit
         retrofit = new Retrofit.Builder()
@@ -124,11 +130,10 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
         btnPaid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateTotalPrice();
                 checkUser();
-                String normalizedTotalStr = txtTotal.getText().toString().replace("$", "").replace(",", ".");
-                total = Float.parseFloat(normalizedTotalStr) * 1000;
-                totalStr = String.format("%.0f", total);
-                generateZaloPayOrder();
+
+//                generateZaloPayOrder();
             }
         });
 
@@ -257,6 +262,12 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
                 intent = new Intent(this, LoginActivity.class);
                 this.startActivity(intent);
             }
+            else{
+                String normalizedTotalStr = txtTotal.getText().toString().replace("$", "").replace(",", ".");
+                total = Float.parseFloat(normalizedTotalStr) * 1000;
+                totalStr = String.format("%.0f", total);
+                generateZaloPayOrder();
+            }
         });
     }
 
@@ -295,7 +306,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements ShoppingC
             }
 
         } catch (Error | Exception e) {
-//                    e.printStackTrace();
+                    e.printStackTrace();
             Toast.makeText(ShoppingCartActivity.this, "Lỗi: ", Toast.LENGTH_SHORT).show();
         }
     }

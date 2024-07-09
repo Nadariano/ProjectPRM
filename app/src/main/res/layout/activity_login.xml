@@ -65,11 +65,11 @@
                 android:layout_below="@id/header"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="24dp"
+                android:fontFamily="sans-serif-medium"
                 android:gravity="center"
-                android:text="Sign Up Form"
+                android:text="Sign In Form"
                 android:textColor="#646464"
-                android:textSize="24sp"
-                android:fontFamily="sans-serif-medium" />
+                android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/etUsername"

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -41,6 +42,14 @@ public class RegisterActivity extends AppCompatActivity {
         EditText etConfirmPassword = findViewById(R.id.etConfirmPassword);
         Button btnSignUp = findViewById(R.id.btnSignUp);
 
+        TextView tvAlreadyAccount = findViewById(R.id.tvAlreadyAccount);
+        tvAlreadyAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
