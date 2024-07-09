@@ -40,7 +40,7 @@
         android:text="1500000" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/viewOrderDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

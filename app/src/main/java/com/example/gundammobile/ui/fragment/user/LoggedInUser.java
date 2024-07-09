@@ -5,7 +5,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +17,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.gundammobile.R;
 import com.example.gundammobile.databinding.FragmentLoggedInUserBinding;
 import com.example.gundammobile.model.User;
+import com.example.gundammobile.ui.activity.MainActivity;
 import com.example.gundammobile.ui.activity.ShoppingCartActivity;
 import com.example.gundammobile.ui.fragment.dashboard.DashboardFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,6 +36,9 @@ public class LoggedInUser extends Fragment {
 
     private User user;
     private UserViewModel userViewModel;
+    Fragment dashboardFragment;
+    FragmentManager fm;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         userViewModel = new ViewModelProvider(requireParentFragment()).get(UserViewModel.class);
@@ -38,11 +47,12 @@ public class LoggedInUser extends Fragment {
         View root = binding.getRoot();
 
 
-        userName=binding.userName;
+        userName = binding.userName;
         // Initialize buttons
         viewCartBtn = binding.viewCartBtn;
         viewOrderHistoryBtn = binding.viewOrderHistoryBtn;
         logoutBtn = binding.logoutBtn;
+        dashboardFragment = new DashboardFragment();
 
         userName.setText(Objects.requireNonNull(userViewModel.getUser().getValue()).getACCOUNT_NAME());
         viewCartBtn.setOnClickListener(v -> {
@@ -52,9 +62,9 @@ public class LoggedInUser extends Fragment {
         });
 
         viewOrderHistoryBtn.setOnClickListener(v -> {
-            // Handle view order history button click
-            intent = new Intent(getActivity(), DashboardFragment.class);
-            startActivity(intent);
+            NavController navController = NavHostFragment.findNavController(this.getParentFragment());
+            navController.popBackStack();
+            navController.navigate(R.id.navigation_dashboard);
         });
 
         logoutBtn.setOnClickListener(v -> {
